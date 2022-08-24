@@ -2,4 +2,7 @@
 
 source "https://rubygems.org"
 
-# gem "rails"
+gem "puma"
+gem "sinatra"
+gem "sinatra-contrib"
+gem "slim"
