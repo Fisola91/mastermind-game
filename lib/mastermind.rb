@@ -1,10 +1,16 @@
-require "mastermind"
+class Mastermind
+  def initialize(passcode:, input: $stdin, output: $stdout, max_attempts: 3)
+    @passcode = passcode
+    @correct_answers = 0
+    @input = input
+    @guess_attempts = 4
+    @output = output
+  end
 
-RSpec.describe Mastermind do
-  describe "#mastermind_board" do
-    it "accepts one correct guess but not in the right position" do
-      guesses = ["RED", "GREEN", "YELLOW", "BLUE"]
-    end
+  def start
+    guess = nil
+    current_attempt = 1
+
 
   end
 end
