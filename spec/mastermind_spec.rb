@@ -1,7 +1,7 @@
 require "mastermind"
 
 RSpec.describe Mastermind do
-  describe "#start" do
+  describe "#mastermind" do
     let(:output) { StringIO.new }
 
     it "won all guesses" do
@@ -11,7 +11,7 @@ RSpec.describe Mastermind do
 
       game.mastermind
 
-      game_output_lines = output.string.split("\n")
+      game_output_lines = output.string.split("\n").map(&:strip)
       expect(game_output_lines[0]).to eq "Congratulations!"
     end
   end
