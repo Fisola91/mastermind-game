@@ -7,9 +7,9 @@ RSpec.describe Mastermind do
     it "won all guesses" do
       guesses = ["RED", "GREEN", "BLUE", "YELLOW"]
       input = String.new(guesses.join("\n"))
-      game = Game.new(passcode: ["RED", "GREEN", "BLUE", "YELLOW"], input: input, output: output, max_attempts: 4)
+      game = Mastermind.new(passcode: ["RED", "GREEN", "BLUE", "YELLOW"], input: input, output: output, guess_attempts: 4)
 
-      game.start
+      game.mastermind
 
       game_output_lines = output.string.split("\n").map(&:strip)
       expect(game_output_lines[0]).to eq "Congratulations!"
