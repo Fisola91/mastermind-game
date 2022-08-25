@@ -12,9 +12,9 @@ class Mastermind
     guess = nil
     current_attempt = 1
     correct = 0
-    while correct <= guess_attempts
-      p guess = input.split("\n")
-      p passcode
+    while correct < guess_attempts
+      guess = input.split("\n")
+      passcode
       guess1 = guess[0]
       guess2 = guess[1]
       guess3 = guess[2]
@@ -28,10 +28,10 @@ class Mastermind
       if guess2 == passcode[1]
         correct += 1
       end
-      if guess3 == passcode[0]
+      if guess3 == passcode[2]
         correct += 1
       end
-      if guess4 == passcode[0]
+      if guess4 == passcode[3]
         correct += 1
       end
 

@@ -11,7 +11,7 @@ RSpec.describe Mastermind do
 
       game.mastermind
 
-      game_output_lines = output.string.split("\n").map(&:strip)
+      game_output_lines = output.string.split("\n")
       expect(game_output_lines[0]).to eq "Congratulations!"
     end
   end
