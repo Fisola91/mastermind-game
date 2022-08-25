@@ -4,7 +4,7 @@ class Mastermind
     @passcode = passcode
     # @correct_answers = 0
     @input = input
-    @guess_attempts = 4
+    @guess_attempts = 5
     @output = output
   end
 
@@ -14,12 +14,17 @@ class Mastermind
     correct = 0
     while correct < guess_attempts
       guess = input.split("\n")
-      passcode
+
+      if guess.length != 4
+        raise ArgumentError, "Number of guess not completed, try again!!"
+      end
+
       guess1 = guess[0]
       guess2 = guess[1]
       guess3 = guess[2]
       guess4 = guess[3]
-      current_attempt += 1
+
+      #check if the number of guesses are 4
 
 
       if guess1 == passcode[0]
@@ -35,11 +40,12 @@ class Mastermind
         correct += 1
       end
 
-      if correct < guess_attempts
+      if guess == passcode
+        output.puts "Congratulations!"
+      else
         output.puts "missed"
         correct = 0
-      else
-        output.puts "Congratulations!"
+        current_attempt += 1
       end
 
 
