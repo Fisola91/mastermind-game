@@ -9,38 +9,44 @@ class Mastermind
     @output = output
   end
 
+  def start
+    output.puts "Welcome to the mastermind game"
+    output.puts "Kindly enter code with color names"
+    mastermind_board
+  end
+
   def mastermind_board
-    guess = nil
+    guess_color = nil
     current_attempt = 1
     correct = 0
     while correct < chances
-      guess = input.split("\n")
+      guess_color = input.split("\n")
 
-       #check if the number of guesses are 4
+       #check if the number of guess_colors are 4
 
-      if guess.length != NUMBER_CODE
-        raise ArgumentError, "Number of guess not completed, try again!!"
+      if guess_color.length != NUMBER_CODE
+        raise ArgumentError, "Number of guess_color not completed, try again!!"
       else
-        guess1 = guess[0]
-        guess2 = guess[1]
-        guess3 = guess[2]
-        guess4 = guess[3]
+        guess_color1 = guess_color[0]
+        guess_color2 = guess_color[1]
+        guess_color3 = guess_color[2]
+        guess_color4 = guess_color[3]
       end
 
-      if guess1 == passcode[0]
+      if guess_color1 == passcode[0]
         correct += 1
       end
-      if guess2 == passcode[1]
+      if guess_color2 == passcode[1]
         correct += 1
       end
-      if guess3 == passcode[2]
+      if guess_color3 == passcode[2]
         correct += 1
       end
-      if guess4 == passcode[3]
+      if guess_color4 == passcode[3]
         correct += 1
       end
 
-      if guess == passcode
+      if guess_color == passcode
         output.puts "Congratulations!"
       else
         output.puts "missed"
