@@ -1,5 +1,8 @@
+class ValueError < StandardError
+end
 class Mastermind
   NUMBER_CODE = 4
+  COLORS = ["RED", "GREEN", "YELLOW", "BLUE", "PURPLE", "ORANGE"]
   attr_reader :passcode, :input, :chances, :output
   def initialize(passcode:, input: $stdin, output: $stdout, chances: 4)
     @passcode = passcode
@@ -11,7 +14,7 @@ class Mastermind
 
   def start
     output.puts "Welcome to the mastermind game"
-    output.puts "hint: color duplicate is not allowed"
+    output.puts "hint: no color duplicate in the secfet code"
     output.puts "Kindly enter code with color names"
     mastermind_board
   end
@@ -21,14 +24,18 @@ class Mastermind
     current_attempt = 1
     correct = 0 #correct will track if we get our guess correctly
 
-    while correct < chances
+    while correct < chances && current_attempt <= chances
       p guess_color = input.split("\n")
 
 
        #check if the number of guess_colors are 4
 
+       raise ValueError, "Make sure your guess is contained in the COLORS variable"  unless guess_color.all? do |guess|
+        COLORS.include?(guess)
+      end
+
       if guess_color.length != NUMBER_CODE
-        raise ArgumentError, "Number of guess_color not completed, try again!!"
+        raise ValueError, "Number of guess_color not completed, try again!!"
       else
         guess_color1 = guess_color[0]
         guess_color2 = guess_color[1]
@@ -81,3 +88,7 @@ end
 # It counts how many rows it took codebreaker to solve the code
 # The codemaker receives that mini-point------LATER
 # If the code
+
+
+# If any of the guess matches the passcode in the right position,
+#  if passcode
