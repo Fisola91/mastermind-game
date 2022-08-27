@@ -11,6 +11,7 @@ class Mastermind
 
   def start
     output.puts "Welcome to the mastermind game"
+    output.puts "hint: color duplicate is not allowed"
     output.puts "Kindly enter code with color names"
     mastermind_board
   end
@@ -18,9 +19,11 @@ class Mastermind
   def mastermind_board
     guess_color = nil
     current_attempt = 1
-    correct = 0
+    correct = 0 #correct will track if we get our guess correctly
+
     while correct < chances
-      guess_color = input.split("\n")
+      p guess_color = input.split("\n")
+
 
        #check if the number of guess_colors are 4
 
@@ -32,6 +35,12 @@ class Mastermind
         guess_color3 = guess_color[2]
         guess_color4 = guess_color[3]
       end
+
+      # guess_color.each_with_index do |guess, idx|
+      #   if guess_color[idx] == passcode[idx]
+      #     correct += 1
+      #   end
+      # end
 
       if guess_color1 == passcode[0]
         correct += 1
@@ -58,3 +67,17 @@ class Mastermind
     end
   end
 end
+
+# Codemaker makes code of color peg and close
+# Codebreaker places color pegs on the empty board
+# Once the codebreaker finished, the codemaker must provide feedback
+# to the codebreaker as the how close the code is close
+# using the tiny peg, the code maker indicates what information is correct
+# For each color that corresponds(right position), use right peg
+# if the color of the peg is correct, but different position, use white peg
+# if the information is correct, no peg is used.
+# Position of the peg does indicate which is cokor is in the right order
+# Once the code breaker has matched hidden code identically, the codemaker reveal the code
+# It counts how many rows it took codebreaker to solve the code
+# The codemaker receives that mini-point------LATER
+# If the code
