@@ -4,7 +4,6 @@ RSpec.describe Mastermind do
   describe "#mastermind" do
     let(:output) { StringIO.new }
 
-
     # it "takes one correct guess in the right position, one incorrect guess and two correct guesses but different position" do
     #   guesses = ["RED", "GREEN", "BLUE", "PURPLE"]
     #   input = guesses.join("\n")
@@ -19,7 +18,7 @@ RSpec.describe Mastermind do
     # end
 
     fit "won all guesses" do
-      guesses = ["RED", "GREEN", "BLUE", "BLACK"]
+      guesses = ["RED", "GREEN", "BLUE", "YELLOW"]
       input = guesses.join("\n")
       game = Mastermind.new(passcode: ["RED", "GREEN", "BLUE", "YELLOW"], input: input, output: output, chances: 4)
 

@@ -28,11 +28,10 @@ class Mastermind
       p guess_color = input.split("\n")
 
 
-       #check if the number of guess_colors are 4
+      # SANITY CHECK
 
        raise ValueError, "Make sure your guess is contained in the COLORS variable"  unless guess_color.all? do |guess|
         COLORS.include?(guess)
-      end
 
       if guess_color.length != NUMBER_CODE
         raise ValueError, "Number of guess_color not completed, try again!!"
