@@ -14,7 +14,7 @@ class Mastermind
 
   def start
     output.puts "Welcome to the mastermind game"
-    output.puts "hint: no color duplicate in the secfet code"
+    output.puts "hint: no color duplicate in the secret code"
     output.puts "Kindly enter code with color names"
     mastermind_board
   end
@@ -25,13 +25,15 @@ class Mastermind
     correct = 0 #correct will track if we get our guess correctly
 
     while correct < chances && current_attempt <= chances
-      p guess_color = input.split("\n")
+      guess_color = input.split("\n")
+      p intersection = guess_color & passcode
 
 
       # SANITY CHECK
 
        raise ValueError, "Make sure your guess is contained in the COLORS variable"  unless guess_color.all? do |guess|
         COLORS.include?(guess)
+       end
 
       if guess_color.length != NUMBER_CODE
         raise ValueError, "Number of guess_color not completed, try again!!"
@@ -42,24 +44,28 @@ class Mastermind
         guess_color4 = guess_color[3]
       end
 
-      # guess_color.each_with_index do |guess, idx|
-      #   if guess_color[idx] == passcode[idx]
-      #     correct += 1
-      #   end
-      # end
 
-      if guess_color1 == passcode[0]
-        correct += 1
+      guess_color.map do |guess, idx|
+        if guess_color[idx] == passcode[idx]
+          correct += 1
+        else
+          guess_color & passcode
+        end
       end
-      if guess_color2 == passcode[1]
-        correct += 1
-      end
-      if guess_color3 == passcode[2]
-        correct += 1
-      end
-      if guess_color4 == passcode[3]
-        correct += 1
-      end
+
+
+      # if guess_color1 == passcode[0]
+      #   correct += 1
+      # end
+      # if guess_color2 == passcode[1]
+      #   correct += 1
+      # end
+      # if guess_color3 == passcode[2]
+      #   correct += 1
+      # end
+      # if guess_color4 == passcode[3]
+      #   correct += 1
+      # end
 
       if guess_color == passcode
         output.puts "Congratulations!"
