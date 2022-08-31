@@ -75,5 +75,21 @@ RSpec.fdescribe Turn do
         expect(feedback).to eq [:partial, :partial, :partial, :partial]
       end
     end
+
+    context "one exact, one partial match" do
+      it "returns one :exact, one :partial value" do
+        turn = Turn.new(passcode: passcode)
+        feedback = turn.guess(["RED", "BLUE", "ORANGE", "ORANGE"])
+        expect(feedback).to eq [:exact, :partial]
+      end
+    end
+
+    context "two exact, two partial matches" do
+      it "returns two :exact, two :partial values" do
+        turn = Turn.new(passcode: passcode)
+        feedback = turn.guess(["RED", "GREEN", "YELLOW", "BLUE"])
+        expect(feedback).to match_array [:exact, :partial, :partial, :exact]
+      end
+    end
   end
 end
