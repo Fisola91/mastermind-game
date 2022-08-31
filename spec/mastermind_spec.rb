@@ -19,7 +19,7 @@ RSpec.describe Mastermind do
     end
 
 
-    xit "won all guesses" do
+    it "congratulates a player that guesses the entire code in first turn" do
       guesses = ["RED", "GREEN", "BLUE", "YELLOW"]
       input = guesses.join("\n")
       game = Mastermind.new(passcode: ["RED", "GREEN", "BLUE", "YELLOW"], input: input, output: output, chances: 4)

@@ -1,5 +1,26 @@
 class ValueError < StandardError
 end
+
+class Turn
+  def initialize(passcode:)
+    @passcode = passcode
+  end
+
+  def guess(colors)
+    result = []
+    passcode.each_with_index do |passcode_color, idx|
+      if colors[idx] == passcode_color
+        result << :exact
+      end
+    end
+    result
+  end
+
+  private
+
+  attr_reader :passcode
+end
+
 class Mastermind
   NUMBER_CODE = 4
   COLORS = ["RED", "GREEN", "YELLOW", "BLUE", "PURPLE", "ORANGE"]
@@ -20,62 +41,31 @@ class Mastermind
   end
 
   def mastermind_board
-    guess_color = nil
+    guess_colors = nil
     current_attempt = 1
     correct = 0 #correct will track if we get our guess correctly
 
     while correct < chances && current_attempt <= chances
-      guess_color = input.split("\n")
-      p intersection = guess_color & passcode
+      guess_colors = input.split("\n")
 
+      unless guess_colors.all? { |guess| COLORS.include?(guess) }
+        raise ValueError, "Make sure your guess is contained in the COLORS variable"
+      end
 
-      # SANITY CHECK
-
-       raise ValueError, "Make sure your guess is contained in the COLORS variable"  unless guess_color.all? do |guess|
-        COLORS.include?(guess)
-       end
-
-      if guess_color.length != NUMBER_CODE
+      if guess_colors.length != NUMBER_CODE
         raise ValueError, "Number of guess_color not completed, try again!!"
-      else
-        guess_color1 = guess_color[0]
-        guess_color2 = guess_color[1]
-        guess_color3 = guess_color[2]
-        guess_color4 = guess_color[3]
       end
 
+      result = Turn.new(passcode: passcode).guess(guess_colors)
 
-      guess_color.map do |guess, idx|
-        if guess_color[idx] == passcode[idx]
-          correct += 1
-        else
-          guess_color & passcode
-        end
-      end
-
-
-      # if guess_color1 == passcode[0]
-      #   correct += 1
-      # end
-      # if guess_color2 == passcode[1]
-      #   correct += 1
-      # end
-      # if guess_color3 == passcode[2]
-      #   correct += 1
-      # end
-      # if guess_color4 == passcode[3]
-      #   correct += 1
-      # end
-
-      if guess_color == passcode
+      if result == [:exact, :exact, :exact, :exact]
         output.puts "Congratulations!"
+        return
       else
         output.puts "missed"
         correct = 0
         current_attempt += 1
       end
-
-
     end
   end
 end
