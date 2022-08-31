@@ -11,6 +11,8 @@ class Turn
     passcode.each_with_index do |passcode_color, idx|
       if colors[idx] == passcode_color
         result << :exact
+      elsif colors.include?(passcode_color)
+        result << :partial
       end
     end
     result

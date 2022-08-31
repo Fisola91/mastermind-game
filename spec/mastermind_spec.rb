@@ -24,7 +24,7 @@ RSpec.describe Mastermind do
       expect(game_output_lines[6]).to eq "You lost, ran out of turns."
     end
 
-    xit "congratulates a player that guesses the entire code in first turn" do
+    it "congratulates a player that guesses the entire code in first turn" do
       guesses = ["RED GREEN BLUE YELLOW"]
       input = StringIO.new(guesses.join("\n"))
       game = Mastermind.new(passcode: ["RED", "GREEN", "BLUE", "YELLOW"], input: input, output: output, chances: 4)
@@ -32,7 +32,7 @@ RSpec.describe Mastermind do
       game.start
 
       game_output_lines = output.string.split("\n").map(&:strip)
-      expect(game_output_lines[3]).to eq "Congratulations!"
+      expect(game_output_lines[2]).to eq "Congratulations!"
     end
   end
 end
