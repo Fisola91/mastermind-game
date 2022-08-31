@@ -48,7 +48,7 @@ class Mastermind
 
     while current_attempt <= chances
       player_input = input.gets.to_s.strip
-      guess_colors = player_input.split(" ")
+      p guess_colors = player_input.split(" ")
 
       unless guess_colors.all? { |guess| COLORS.include?(guess) }
         raise ValueError, "Make sure your guess is contained in the COLORS variable"
@@ -62,12 +62,19 @@ class Mastermind
 
       if result == [:exact, :exact, :exact, :exact]
         output.puts "Congratulations!"
-        return
-      else
+      return
+      elsif result == [:exact]
+        output.puts "One correct"
+      elsif result == [:exact, :exact]
+        output.puts "Two correct"
+      elsif result == [:exact, :exact, :exact]
+        output.puts "Three correct"
+      elsif result == []
         output.puts "The game doesn't know how to deal with this yet"
       end
       current_attempt += 1
     end
+    output.puts "You lost, ran out of turns."
   end
 end
 
