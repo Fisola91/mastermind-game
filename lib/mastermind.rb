@@ -36,7 +36,6 @@ class Mastermind
 
   def start
     output.puts "Welcome to the mastermind game"
-    output.puts "hint: no color duplicate in the secret code"
     output.puts "Kindly enter code with color names"
     mastermind_board
   end
