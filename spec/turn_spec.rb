@@ -1,6 +1,6 @@
 require "mastermind"
 
-RSpec.fdescribe Turn do
+RSpec.describe Turn do
   let(:passcode) { ["RED", "GREEN", "BLUE", "YELLOW"] }
 
   describe "#guess" do

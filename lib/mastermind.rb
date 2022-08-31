@@ -24,10 +24,11 @@ end
 class Mastermind
   NUMBER_CODE = 4
   COLORS = ["RED", "GREEN", "YELLOW", "BLUE", "PURPLE", "ORANGE"]
+
   attr_reader :passcode, :input, :chances, :output
+
   def initialize(passcode:, input: $stdin, output: $stdout, chances: 4)
     @passcode = passcode
-    # @correct_answers = 0
     @input = input
     @chances = 4
     @output = output
@@ -40,13 +41,15 @@ class Mastermind
     mastermind_board
   end
 
+  private
+
   def mastermind_board
     guess_colors = nil
     current_attempt = 1
-    correct = 0 #correct will track if we get our guess correctly
 
-    while correct < chances && current_attempt <= chances
-      guess_colors = input.split("\n")
+    while current_attempt <= chances
+      player_input = input.gets.to_s.strip
+      guess_colors = player_input.split(" ")
 
       unless guess_colors.all? { |guess| COLORS.include?(guess) }
         raise ValueError, "Make sure your guess is contained in the COLORS variable"
@@ -62,10 +65,9 @@ class Mastermind
         output.puts "Congratulations!"
         return
       else
-        output.puts "missed"
-        correct = 0
-        current_attempt += 1
+        output.puts "The game doesn't know how to deal with this yet"
       end
+      current_attempt += 1
     end
   end
 end
