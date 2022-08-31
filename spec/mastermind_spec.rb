@@ -17,7 +17,7 @@ RSpec.describe Mastermind do
       game.start
 
       game_output_lines = output.string.split("\n").map(&:strip)
-      expect(game_output_lines[2]).to eq "The game doesn't know how to deal with this yet"
+      expect(game_output_lines[2]).to eq "No matches"
       expect(game_output_lines[3]).to eq "One correct"
       expect(game_output_lines[4]).to eq "Two correct"
       expect(game_output_lines[5]).to eq "Three correct"
