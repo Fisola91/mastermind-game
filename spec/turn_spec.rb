@@ -59,5 +59,21 @@ RSpec.fdescribe Turn do
         expect(feedback).to eq [:partial, :partial]
       end
     end
+
+    context "three colors guessed, wrong positions" do
+      it "returns three :partial values" do
+        turn = Turn.new(passcode: passcode)
+        feedback = turn.guess(["ORANGE", "BLUE", "GREEN", "RED"])
+        expect(feedback).to eq [:partial, :partial, :partial]
+      end
+    end
+
+    context "four colors guessed, wrong positions" do
+      it "returns four :partial values" do
+        turn = Turn.new(passcode: passcode)
+        feedback = turn.guess(["YELLOW", "BLUE", "GREEN", "RED"])
+        expect(feedback).to eq [:partial, :partial, :partial, :partial]
+      end
+    end
   end
 end
