@@ -2,4 +2,8 @@
 
 source "https://rubygems.org"
 
-# gem "rails"
+ruby "3.0.3"
+
+group :test do
+  "rspec"
+end

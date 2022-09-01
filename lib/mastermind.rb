@@ -85,13 +85,13 @@ class Mastermind
         output.puts "Congratulations!"
       return
       elsif result == [:exact]
-        output.puts "One correct"
+        output.puts "One correct guess at the exact position"
       elsif result == [:exact, :exact]
-        output.puts "Two correct"
+        output.puts "Two correct guess at the exact position"
       elsif result == [:exact, :exact, :exact]
-        output.puts "Three correct"
+        output.puts "Three correct guess at the exact position"
       elsif result == []
-        output.puts "The game doesn't know how to deal with this yet"
+        output.puts "Incorrect guess"
       end
       current_attempt += 1
     end
