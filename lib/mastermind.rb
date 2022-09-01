@@ -1,6 +1,9 @@
 class ValueError < StandardError
 end
 
+class UnknownColorError < StandardError
+end
+
 class Turn
   def initialize(passcode:)
     @passcode = passcode
@@ -17,6 +20,21 @@ class Turn
     end
     result
   end
+
+class ValidateInput
+
+  # def self.call(colors)
+  #   unless colors.all? { |guess| COLORS.include?(guess) }
+  #     raise UnknownColorError, "Make sure your guess is contained in the COLORS variable"
+  #   end
+
+    # if guess_colors.length != NUMBER_CODE
+    #   raise ValueError, "Number of guess_color not completed, try again!!"
+    # end
+
+
+
+end
 
   private
 
@@ -52,13 +70,14 @@ class Mastermind
       player_input = input.gets.to_s.strip
       p guess_colors = player_input.split(" ")
 
-      unless guess_colors.all? { |guess| COLORS.include?(guess) }
-        raise ValueError, "Make sure your guess is contained in the COLORS variable"
-      end
+      # unless guess_colors.all? { |guess| COLORS.include?(guess) }
+      #   raise ValueError, "Make sure your guess is contained in the COLORS variable"
+      # end
 
-      if guess_colors.length != NUMBER_CODE
-        raise ValueError, "Number of guess_color not completed, try again!!"
-      end
+      # if guess_colors.length != NUMBER_CODE
+      #   raise ValueError, "Number of guess_color not completed, try again!!"
+      # end
+      ValidateInput.call(guess_colors)
 
       result = Turn.new(passcode: passcode).guess(guess_colors)
 
