@@ -1,6 +1,3 @@
-class ValueError < StandardError
-end
-
 class UnknownColorError < StandardError
 end
 
