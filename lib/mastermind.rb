@@ -21,24 +21,33 @@ class Turn
     result
   end
 
-class ValidateInput
-
-  # def self.call(colors)
-  #   unless colors.all? { |guess| COLORS.include?(guess) }
-  #     raise UnknownColorError, "Make sure your guess is contained in the COLORS variable"
-  #   end
-
-    # if guess_colors.length != NUMBER_CODE
-    #   raise ValueError, "Number of guess_color not completed, try again!!"
-    # end
 
 
-
-end
 
   private
 
   attr_reader :passcode
+end
+class ValidateInput
+
+  COLORS = ["RED", "GREEN", "YELLOW", "BLUE", "PURPLE", "ORANGE"]
+  def self.call(colors)
+    unless colors.all? { |guess| COLORS.include?(guess) }
+      raise UnknownColorError
+    end
+
+    # cc = []
+    # if colors != cc << passcode.join(" ")
+    #   raise UnknownColorError
+    # end
+
+    # if guess_colors.length != NUMBER_CODE
+    #   raise ValueError, "Number of guess_color not completed, try again!!"
+    # end
+  end
+
+
+
 end
 
 class Mastermind

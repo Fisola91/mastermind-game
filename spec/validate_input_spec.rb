@@ -2,7 +2,7 @@ require "mastermind"
 
 RSpec.describe ValidateInput do
   describe ".call" do
-    it "raises an error with a value not matching predefined colors" do
+    fit "raises an error with a value not matching predefined colors" do
       expect { described_class.call(["RED GREEN YELLOW MAGENTA"]) }.to raise_error(UnknownColorError)
     end
 
