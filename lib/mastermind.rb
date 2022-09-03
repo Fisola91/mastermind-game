@@ -22,8 +22,6 @@ class Turn
   end
 
 
-
-
   private
 
   attr_reader :passcode
@@ -32,9 +30,6 @@ end
 COLORS = ["RED", "GREEN", "YELLOW", "BLUE", "PURPLE", "ORANGE"]
 NUMBER_CODE = 4
 class ValidateInput
-
-  # COLORS = ["RED", "GREEN", "YELLOW", "BLUE", "PURPLE", "ORANGE"]
-  # NUMBER_CODE = 4
   def self.call(colors)
     unless colors.all? { |guess| COLORS.include?(guess) }
       raise UnknownColorError
@@ -48,8 +43,6 @@ class ValidateInput
 end
 
 class Mastermind
-  # NUMBER_CODE = 4
-  # COLORS = ["RED", "GREEN", "YELLOW", "BLUE", "PURPLE", "ORANGE"]
 
   attr_reader :passcode, :input, :chances, :output
 
