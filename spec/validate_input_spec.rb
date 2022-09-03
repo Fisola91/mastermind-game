@@ -6,15 +6,15 @@ RSpec.describe ValidateInput do
       expect { described_class.call(["RED GREEN YELLOW MAGENTA"]) }.to raise_error(UnknownColorError)
     end
 
-    it "raises an error with not enough colors" do
+    fit "raises an error with not enough colors" do
       expect { described_class.call(["RED"]) }.to raise_error(NumberOfColorsError)
     end
 
-    it "raises an error with too many colors" do
+    fit "raises an error with too many colors" do
       expect { described_class.call(["RED", "GREEN", "YELLOW", "ORANGE", "BLUE"]) }.to raise_error(NumberOfColorsError)
     end
 
-    it "does nothing given correct number of colors" do
+    fit "does nothing given correct number of colors" do
       expect(described_class.call(["RED", "GREEN", "YELLOW", "ORANGE"])).to eq nil
     end
   end

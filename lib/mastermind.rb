@@ -4,6 +4,9 @@ end
 class UnknownColorError < StandardError
 end
 
+class NumberOfColorsError < StandardError
+end
+
 class Turn
   def initialize(passcode:)
     @passcode = passcode
@@ -31,19 +34,18 @@ end
 class ValidateInput
 
   COLORS = ["RED", "GREEN", "YELLOW", "BLUE", "PURPLE", "ORANGE"]
+  NUMBER_CODE = 4
   def self.call(colors)
     unless colors.all? { |guess| COLORS.include?(guess) }
       raise UnknownColorError
     end
 
-    # cc = []
-    # if colors != cc << passcode.join(" ")
-    #   raise UnknownColorError
-    # end
+    if colors.size != NUMBER_CODE
+      raise NumberOfColorsError
+    else
+      nil
+    end
 
-    # if guess_colors.length != NUMBER_CODE
-    #   raise ValueError, "Number of guess_color not completed, try again!!"
-    # end
   end
 
 
