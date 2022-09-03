@@ -31,30 +31,28 @@ class Turn
 
   attr_reader :passcode
 end
+
+COLORS = ["RED", "GREEN", "YELLOW", "BLUE", "PURPLE", "ORANGE"]
+NUMBER_CODE = 4
 class ValidateInput
 
-  COLORS = ["RED", "GREEN", "YELLOW", "BLUE", "PURPLE", "ORANGE"]
-  NUMBER_CODE = 4
+  # COLORS = ["RED", "GREEN", "YELLOW", "BLUE", "PURPLE", "ORANGE"]
+  # NUMBER_CODE = 4
   def self.call(colors)
     unless colors.all? { |guess| COLORS.include?(guess) }
       raise UnknownColorError
     end
-
-    if colors.size != NUMBER_CODE
+    if colors.length != NUMBER_CODE
       raise NumberOfColorsError
     else
       nil
     end
-
   end
-
-
-
 end
 
 class Mastermind
-  NUMBER_CODE = 4
-  COLORS = ["RED", "GREEN", "YELLOW", "BLUE", "PURPLE", "ORANGE"]
+  # NUMBER_CODE = 4
+  # COLORS = ["RED", "GREEN", "YELLOW", "BLUE", "PURPLE", "ORANGE"]
 
   attr_reader :passcode, :input, :chances, :output
 
@@ -81,13 +79,6 @@ class Mastermind
       player_input = input.gets.to_s.strip
       p guess_colors = player_input.split(" ")
 
-      # unless guess_colors.all? { |guess| COLORS.include?(guess) }
-      #   raise ValueError, "Make sure your guess is contained in the COLORS variable"
-      # end
-
-      # if guess_colors.length != NUMBER_CODE
-      #   raise ValueError, "Number of guess_color not completed, try again!!"
-      # end
       ValidateInput.call(guess_colors)
 
       result = Turn.new(passcode: passcode).guess(guess_colors)
