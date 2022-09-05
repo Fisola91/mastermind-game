@@ -1,8 +1,6 @@
-class UnknownColorError < StandardError
-end
+class UnknownColorError < StandardError; end
 
-class NumberOfColorsError < StandardError
-end
+class NumberOfColorsError < StandardError; end
 
 class Turn
   def initialize(passcode:)
@@ -26,10 +24,15 @@ class Turn
 
   attr_reader :passcode
 end
+module ColorsAndCodeNumber
+  COLORS = ["RED", "GREEN", "YELLOW", "BLUE", "PURPLE", "ORANGE"]
+  NUMBER_CODE = 4
+end
 
-COLORS = ["RED", "GREEN", "YELLOW", "BLUE", "PURPLE", "ORANGE"]
-NUMBER_CODE = 4
+
 class ValidateInput
+
+  include ColorsAndCodeNumber
   def self.call(colors)
     unless colors.all? { |guess| COLORS.include?(guess) }
       raise UnknownColorError
@@ -43,6 +46,8 @@ class ValidateInput
 end
 
 class Mastermind
+
+  include ColorsAndCodeNumber
 
   attr_reader :passcode, :input, :chances, :output
 
