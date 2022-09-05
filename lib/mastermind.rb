@@ -1,7 +1,6 @@
 require_relative "constant_variable"
-class UnknownColorError < StandardError; end
+require_relative "validate"
 
-class NumberOfColorsError < StandardError; end
 
 class Turn
   def initialize(passcode:)
@@ -20,28 +19,11 @@ class Turn
     result
   end
 
-
   private
 
   attr_reader :passcode
 end
 
-
-
-class ValidateInput
-
-  include ColorsAndCodeNumber
-  def self.call(colors)
-    unless colors.all? { |guess| COLORS.include?(guess) }
-      raise UnknownColorError
-    end
-    if colors.length != NUMBER_CODE
-      raise NumberOfColorsError
-    else
-      nil
-    end
-  end
-end
 
 class Mastermind
 
