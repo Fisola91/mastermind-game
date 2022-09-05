@@ -1,3 +1,4 @@
+require_relative "constant_variable"
 class UnknownColorError < StandardError; end
 
 class NumberOfColorsError < StandardError; end
@@ -24,10 +25,7 @@ class Turn
 
   attr_reader :passcode
 end
-module ColorsAndCodeNumber
-  COLORS = ["RED", "GREEN", "YELLOW", "BLUE", "PURPLE", "ORANGE"]
-  NUMBER_CODE = 4
-end
+
 
 
 class ValidateInput
