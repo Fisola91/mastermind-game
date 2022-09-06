@@ -1,3 +1,4 @@
+require_relative "constant_variable"
 
 class UnknownColorError < StandardError; end
 

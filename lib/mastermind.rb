@@ -25,6 +25,7 @@ class Turn
 end
 
 
+
 class Mastermind
 
   include ColorsAndCodeNumber
