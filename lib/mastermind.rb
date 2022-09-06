@@ -1,30 +1,6 @@
 require_relative "constant_variable"
 require_relative "validate"
-
-
-class Turn
-  def initialize(passcode:)
-    @passcode = passcode
-  end
-
-  def guess(colors)
-    result = []
-    passcode.each_with_index do |passcode_color, idx|
-      if colors[idx] == passcode_color
-        result << :exact
-      elsif colors.include?(passcode_color)
-        result << :partial
-      end
-    end
-    result
-  end
-
-  private
-
-  attr_reader :passcode
-end
-
-
+require_relative "turn"
 
 class Mastermind
 
@@ -53,7 +29,7 @@ class Mastermind
 
     while current_attempt <= chances
       player_input = input.gets.to_s.strip
-      p guess_colors = player_input.split(" ")
+      guess_colors = player_input.split(" ")
 
       ValidateInput.call(guess_colors)
 
