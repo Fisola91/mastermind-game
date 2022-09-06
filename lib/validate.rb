@@ -9,10 +9,10 @@ class ValidateInput
   include ColorsAndCodeNumber
   def self.call(colors)
     unless colors.all? { |guess| COLORS.include?(guess) }
-      raise UnknownColorError
+      raise UnknownColorError, "Ensure the guess colors are contained in the predefined colors"
     end
     if colors.length != NUMBER_CODE
-      raise NumberOfColorsError
+      raise NumberOfColorsError, "Ensure that the length of the guesses is four."
     else
       nil
     end
