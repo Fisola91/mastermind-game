@@ -1,5 +1,6 @@
-class ValueError < StandardError
-end
+require_relative "constant_variable"
+require_relative "validate"
+
 
 class Turn
   def initialize(passcode:)
@@ -23,9 +24,11 @@ class Turn
   attr_reader :passcode
 end
 
+
+
 class Mastermind
-  NUMBER_CODE = 4
-  COLORS = ["RED", "GREEN", "YELLOW", "BLUE", "PURPLE", "ORANGE"]
+
+  include ColorsAndCodeNumber
 
   attr_reader :passcode, :input, :chances, :output
 
@@ -52,13 +55,7 @@ class Mastermind
       player_input = input.gets.to_s.strip
       p guess_colors = player_input.split(" ")
 
-      unless guess_colors.all? { |guess| COLORS.include?(guess) }
-        raise ValueError, "Make sure your guess is contained in the COLORS variable"
-      end
-
-      if guess_colors.length != NUMBER_CODE
-        raise ValueError, "Number of guess_color not completed, try again!!"
-      end
+      ValidateInput.call(guess_colors)
 
       result = Turn.new(passcode: passcode).guess(guess_colors)
 
