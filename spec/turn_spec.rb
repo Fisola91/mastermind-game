@@ -4,7 +4,7 @@ RSpec.describe Turn do
   let(:passcode) { ["RED", "GREEN", "BLUE", "YELLOW"] }
 
   describe "#guess" do
-    context "no elements guessed right" do
+    context "no elements guessed exactly" do
       it "returns an empty array" do
         turn = Turn.new(passcode: passcode)
         feedback = turn.guess(["ORANGE", "ORANGE", "ORANGE", "ORANGE"])
@@ -20,7 +20,7 @@ RSpec.describe Turn do
       end
     end
 
-    context "two elements guessed at the right position" do
+    context "two elements guessed at the exact position" do
       it "returns two :exact values" do
         turn = Turn.new(passcode: passcode)
         feedback = turn.guess(["RED", "GREEN", "ORANGE", "ORANGE"])
