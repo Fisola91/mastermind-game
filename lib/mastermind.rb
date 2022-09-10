@@ -17,7 +17,7 @@ class Mastermind
 
   def start
     output.puts "Welcome to the mastermind game"
-    output.puts "Kindly enter code with color names"
+    output.puts "Kindly enter your guess for the four letter code"
     mastermind_board
   end
 
