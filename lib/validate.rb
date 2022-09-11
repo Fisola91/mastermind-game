@@ -8,13 +8,24 @@ class ValidateInput
 
   include ColorsAndCodeNumber
   def self.call(colors)
+
+    raise UnknownColorError, NumberOfColorsError
+  rescue UnknownColorError
     unless colors.all? { |guess| COLORS.include?(guess) }
-      raise UnknownColorError, "Ensure the guess colors are contained in the predefined colors"
+      return
     end
-    if colors.length != NUMBER_CODE
-      raise NumberOfColorsError, "Ensure that the length of the guesses is four."
-    else
-      nil
+
+  rescue NumberOfColorsError
+    unless colors.length == NUMBER_CODE
+      return
     end
+      # rescue NumberOfColorsError
+      #   puts "Ensure that the length of the guesses is four."
   end
 end
+# def gem_version(name)
+#   Gem.loaded_specs[name].version
+# rescue NoMethodError
+#   raise NoMethodError, "No gem loaded for #{name}"
+# end
+# end

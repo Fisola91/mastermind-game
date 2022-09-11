@@ -88,35 +88,31 @@ RSpec.describe Mastermind do
         expect(game_output_lines[5]).to eq "Congratulations!"
       end
 
-    # context "guess color(s) at partial position" do
-    #   it "returns a player that guesses the entire code in first turn" do
-    #     guesses = ["YELLOW BLUE GREEN RED"]
-    #     input = StringIO.new(guesses.join("\n"))
-    #     game = Mastermind.new(passcode: ["RED", "GREEN", "BLUE", "YELLOW"], input: input, output: output, chances: 4)
+      it "exits the game if a player makes invalid move" do
+        guesses = ["A B C D"]
+        input = StringIO.new(guesses.join("\n"))
+        game = Mastermind.new(passcode: ["RED", "GREEN", "BLUE", "YELLOW"], input: input, output: output, chances: 4)
 
-    #     game.start
+        game.start
 
-    #     game_output_lines = output.string.split("\n").map(&:strip)
-    #     expect(game_output_lines[2]).to eq "Congratulations!"
-    #   end
+        game_output_lines = output.string.split("\n").map(&:strip)
+        expect(game_output_lines[2]).to eq "Invalid move, kindly start again"
+      end
 
+      it "exits the game if a player makes invalid move in the second turn" do
+        guesses = ["RED ORANGE PURPLE ORANGE",
+                   "A B C D"
+        ]
+        input = StringIO.new(guesses.join("\n"))
+        game = Mastermind.new(passcode: ["RED", "GREEN", "BLUE", "YELLOW"], input: input, output: output, chances: 4)
 
-    # end
+        game.start
 
+        game_output_lines = output.string.split("\n").map(&:strip)
+        expect(game_output_lines[2]).to eq "One correct guess at the exact position"
+        expect(game_output_lines[3]).to eq "Invalid move, kindly start again!"
+      end
     end
 
-    # it "congratulates a player that guesses the entire code in the second turn" do
-    #   guesses = ["RED YELLOW PURPLE ORANGE",
-    #               "RED GREEN BLUE YELLOW"
-    #   ]
-    #   input = StringIO.new(guesses.join("\n"))
-    #   game = Mastermind.new(passcode: ["RED", "GREEN", "BLUE", "YELLOW"], input: input, output: output, chances: 4)
-
-    #   game.start
-
-    #   game_output_lines = output.string.split("\n").map(&:strip)
-    #   expect(game_output_lines[2]).to eq "One correct guess at the exact position"
-    #   expect(game_output_lines[3]).to eq "Congratulations!"
-    # end
   end
 end
