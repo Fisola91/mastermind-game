@@ -31,11 +31,17 @@ class Mastermind
       player_input = input.gets.to_s.strip
       guess_colors = player_input.split(" ")
 
-      ValidateInput.call(guess_colors)
       # unless guess_colors.all? { |guess| COLORS.include?(guess) }
       #   return output.puts "Invalid move, kindly start again!"
       # end
-      return output.puts "Invalid move, kindly start again!"
+      begin
+        ValidateInput.call(guess_colors)
+      rescue UnknownColorError
+        return output.puts "Invalid input, start again!"
+      rescue NumberOfColorsError
+        return output.puts "Ensure you enter four colors, start again!"
+      end
+
 
 
       result = Turn.new(passcode: passcode).guess(guess_colors)

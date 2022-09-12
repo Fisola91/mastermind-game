@@ -1,6 +1,6 @@
 require "mastermind"
 
-RSpec.fdescribe ValidateInput do
+RSpec.describe ValidateInput do
   describe ".call" do
     it "raises an error with a value not matching predefined colors" do
       expect { described_class.call(["RED GREEN YELLOW MAGENTA"]) }.to raise_error(UnknownColorError)
@@ -18,9 +18,9 @@ RSpec.fdescribe ValidateInput do
       expect(described_class.call(["RED", "GREEN", "YELLOW", "ORANGE"])).to eq nil
     end
 
-    it "inputs invalid move" do
-      expect(described_class.call(["A B C D"])).to eq("invalid move")
-    end
+    # it "inputs invalid move" do
+    #   expect(described_class.call(["A B C D"])).to eq("invalid move")
+    # end
 
 
 

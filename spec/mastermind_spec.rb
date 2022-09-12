@@ -1,6 +1,6 @@
 require "mastermind"
 
-RSpec.describe Mastermind do
+RSpec.fdescribe Mastermind do
   describe "#mastermind" do
     let(:output) { StringIO.new }
 
@@ -87,6 +87,8 @@ RSpec.describe Mastermind do
         expect(game_output_lines[4]).to eq "Three correct guess at the exact position"
         expect(game_output_lines[5]).to eq "Congratulations!"
       end
+    end
+    context "game exit" do
 
       it "exits the game if a player makes invalid move" do
         guesses = ["A B C D"]
@@ -96,7 +98,7 @@ RSpec.describe Mastermind do
         game.start
 
         game_output_lines = output.string.split("\n").map(&:strip)
-        expect(game_output_lines[2]).to eq "Invalid move, kindly start again"
+        expect(game_output_lines[2]).to eq "Invalid input, start again!"
       end
 
       it "exits the game if a player makes invalid move in the second turn" do
@@ -110,9 +112,22 @@ RSpec.describe Mastermind do
 
         game_output_lines = output.string.split("\n").map(&:strip)
         expect(game_output_lines[2]).to eq "One correct guess at the exact position"
-        expect(game_output_lines[3]).to eq "Invalid move, kindly start again!"
+        expect(game_output_lines[3]).to eq "Invalid input, start again!"
       end
+
+      it "exit the game when a player inputs not enough colors" do
+        guesses = ["RED ORANGE"]
+        input = StringIO.new(guesses.join("\n"))
+        game = Mastermind.new(passcode: ["RED", "GREEN", "BLUE", "YELLOW"], input: input, output: output, chances: 4)
+
+        game.start
+
+        game_output_lines = output.string.split("\n").map(&:strip)
+        expect(game_output_lines[2]).to eq "Ensure you enter four colors, start again!"
+      end
+
     end
+
 
   end
 end

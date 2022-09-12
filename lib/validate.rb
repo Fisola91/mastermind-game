@@ -1,7 +1,7 @@
 require_relative "constant_variable"
 
-class UnknownColorError < StandardError; end
 
+class UnknownColorError < StandardError; end
 class NumberOfColorsError < StandardError; end
 
 class ValidateInput
@@ -9,18 +9,35 @@ class ValidateInput
   include ColorsAndCodeNumber
   def self.call(colors)
 
-    raise UnknownColorError, NumberOfColorsError
-  rescue UnknownColorError
-    unless colors.all? { |guess| COLORS.include?(guess) }
-      return
-    end
+      unless colors.all? { |guess| COLORS.include?(guess) }
+          raise UnknownColorError
+      end
 
-  rescue NumberOfColorsError
-    unless colors.length == NUMBER_CODE
-      return
-    end
-      # rescue NumberOfColorsError
-      #   puts "Ensure that the length of the guesses is four."
+    # rescue UnknownColorError
+    #   puts "Invalid input, kindly start again!"
+    #   exit
+    # end
+
+      if colors.length != NUMBER_CODE
+        raise NumberOfColorsError
+      end
+    #   raise
+    # rescue NumberOfColorsError
+    #   puts "Ensure you enter four colors, start again!"
+    #   exit
+
+
+
+
+
+
+
+
+
+    # return
+    # rescue UnknownColorError
+    #   raise
+
   end
 end
 # def gem_version(name)
