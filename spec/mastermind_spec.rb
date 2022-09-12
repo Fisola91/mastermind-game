@@ -115,7 +115,7 @@ RSpec.fdescribe Mastermind do
         expect(game_output_lines[3]).to eq "Invalid input, start again!"
       end
 
-      it "exit the game when a player inputs not enough colors" do
+      it "exits the game when a player inputs not enough colors in the first turn" do
         guesses = ["RED ORANGE"]
         input = StringIO.new(guesses.join("\n"))
         game = Mastermind.new(passcode: ["RED", "GREEN", "BLUE", "YELLOW"], input: input, output: output, chances: 4)
@@ -124,6 +124,20 @@ RSpec.fdescribe Mastermind do
 
         game_output_lines = output.string.split("\n").map(&:strip)
         expect(game_output_lines[2]).to eq "Ensure you enter four colors, start again!"
+      end
+
+      it "exits the game when player inputs not enough colors in the second turn" do
+        guesses = ["RED ORANGE PURPLE ORANGE",
+                   "RED ORANGE"
+        ]
+        input = StringIO.new(guesses.join("\n"))
+        game = Mastermind.new(passcode: ["RED", "GREEN", "BLUE", "YELLOW"], input: input, output: output, chances: 4)
+
+        game.start
+
+        game_output_lines = output.string.split("\n").map(&:strip)
+        expect(game_output_lines[2]).to eq "One correct guess at the exact position"
+        expect(game_output_lines[3]).to eq "Ensure you enter four colors, start again!"
       end
 
     end

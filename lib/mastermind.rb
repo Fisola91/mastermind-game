@@ -31,9 +31,6 @@ class Mastermind
       player_input = input.gets.to_s.strip
       guess_colors = player_input.split(" ")
 
-      # unless guess_colors.all? { |guess| COLORS.include?(guess) }
-      #   return output.puts "Invalid move, kindly start again!"
-      # end
       begin
         ValidateInput.call(guess_colors)
       rescue UnknownColorError
