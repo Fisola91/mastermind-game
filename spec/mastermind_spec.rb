@@ -1,6 +1,6 @@
 require "mastermind"
 
-RSpec.fdescribe Mastermind do
+RSpec.describe Mastermind do
   describe "#mastermind" do
     let(:output) { StringIO.new }
 
@@ -149,15 +149,6 @@ RSpec.fdescribe Mastermind do
         expect(game_output_lines[4]).to eq "Three correct guess at the exact position"
         expect(game_output_lines[5]).to eq "Invalid input, try again!"
       end
-
-
-
-
-
-
-
-
-
 
 
       it "exits the game if a player inputs not enough colors in the first turn" do

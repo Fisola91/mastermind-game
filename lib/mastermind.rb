@@ -31,16 +31,21 @@ class Mastermind
       player_input = input.gets.to_s.strip
       guess_colors = player_input.split(" ")
 
+
+
+
       begin
         ValidateInput.call(guess_colors)
       rescue UnknownColorError
-        return output.puts "Invalid input, try again!"
+        output.puts "Invalid input, try again!"
+        redo
       rescue NumberOfColorsError
-        return output.puts "Ensure you enter four colors, try again!"
+        output.puts "Ensure you enter four colors, try again!"
+        redo
       end
 
-
-
+      # If you made an invalid move
+      # throw a rescue but don't quit the game
       result = Turn.new(passcode: passcode).guess(guess_colors)
 
       if result == [:exact, :exact, :exact, :exact]
