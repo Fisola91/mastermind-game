@@ -34,9 +34,9 @@ class Mastermind
       begin
         ValidateInput.call(guess_colors)
       rescue UnknownColorError
-        return output.puts "Invalid input, start again!"
+        return output.puts "Invalid input, try again!"
       rescue NumberOfColorsError
-        return output.puts "Ensure you enter four colors, start again!"
+        return output.puts "Ensure you enter four colors, try again!"
       end
 
 
