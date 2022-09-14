@@ -31,7 +31,16 @@ class Mastermind
       player_input = input.gets.to_s.strip
       guess_colors = player_input.split(" ")
 
-      ValidateInput.call(guess_colors)
+      begin
+        ValidateInput.call(guess_colors)
+      rescue UnknownColorError
+        output.puts "Invalid input, try again!"
+        redo
+      rescue NumberOfColorsError
+        output.puts "Ensure you enter four colors, try again!"
+        redo
+      end
+
 
       result = Turn.new(passcode: passcode).guess(guess_colors)
 

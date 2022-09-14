@@ -87,36 +87,20 @@ RSpec.describe Mastermind do
         expect(game_output_lines[4]).to eq "Three correct guess at the exact position"
         expect(game_output_lines[5]).to eq "Congratulations!"
       end
-
-    # context "guess color(s) at partial position" do
-    #   it "returns a player that guesses the entire code in first turn" do
-    #     guesses = ["YELLOW BLUE GREEN RED"]
-    #     input = StringIO.new(guesses.join("\n"))
-    #     game = Mastermind.new(passcode: ["RED", "GREEN", "BLUE", "YELLOW"], input: input, output: output, chances: 4)
-
-    #     game.start
-
-    #     game_output_lines = output.string.split("\n").map(&:strip)
-    #     expect(game_output_lines[2]).to eq "Congratulations!"
-    #   end
-
-
-    # end
-
     end
 
-    # it "congratulates a player that guesses the entire code in the second turn" do
-    #   guesses = ["RED YELLOW PURPLE ORANGE",
-    #               "RED GREEN BLUE YELLOW"
-    #   ]
-    #   input = StringIO.new(guesses.join("\n"))
-    #   game = Mastermind.new(passcode: ["RED", "GREEN", "BLUE", "YELLOW"], input: input, output: output, chances: 4)
+    context "game restart" do
+      it "restarts the game if a player makes an invalid move" do
+        guesses = ["A B C D", "RED GREEN BLUE YELLOW"]
+        input = StringIO.new(guesses.join("\n"))
+        game = Mastermind.new(passcode: ["RED", "GREEN", "BLUE", "YELLOW"], input: input, output: output, chances: 4)
 
-    #   game.start
+        game.start
 
-    #   game_output_lines = output.string.split("\n").map(&:strip)
-    #   expect(game_output_lines[2]).to eq "One correct guess at the exact position"
-    #   expect(game_output_lines[3]).to eq "Congratulations!"
-    # end
+        game_output_lines = output.string.split("\n").map(&:strip)
+        expect(game_output_lines[2]).to eq("Invalid input, try again!")
+        expect(game_output_lines[3]).to eq("Congratulations!")
+      end
+    end
   end
 end
