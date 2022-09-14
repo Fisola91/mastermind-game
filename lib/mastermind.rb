@@ -1,6 +1,7 @@
 require_relative "constant_variable"
 require_relative "validate"
 require_relative "turn"
+require_relative "turn_message"
 
 class Mastermind
 
@@ -44,18 +45,14 @@ class Mastermind
 
       result = Turn.new(passcode: passcode).guess(guess_colors)
 
+      message = TurnMessage.for(result)
       if result == [:exact, :exact, :exact, :exact]
-        output.puts "Congratulations!"
-      return
-      elsif result == [:exact]
-        output.puts "One correct guess at the exact position"
-      elsif result == [:exact, :exact]
-        output.puts "Two correct guess at the exact position"
-      elsif result == [:exact, :exact, :exact]
-        output.puts "Three correct guess at the exact position"
-      elsif result == []
-        output.puts "Incorrect guess"
+        output.puts message
+        return
+      else
+        output.puts message
       end
+
       current_attempt += 1
     end
     output.puts "You lost, ran out of turns."
