@@ -38,12 +38,21 @@ RSpec.fdescribe TurnMessage do
       end
     end
 
-    context "empty guess" do
-      it "returns a message (three correct guess) to the player" do
+    context "incorrect guess" do
+      it "returns a message (incorrect) to the player" do
         turn = Turn.new(passcode: passcode)
-        turn_message = turn.guess([])
+        turn_message = turn.guess(["ORANGE", "ORANGE", "ORANGE", "ORANGE"])
         expect(described_class.for(turn_message)).to eq("Incorrect guess")
       end
     end
+
+    context "unimplemented guess" do
+      it "returns a message (not implemented) to the player" do
+        turn = Turn.new(passcode: passcode)
+        expect(described_class.for(turn)).to eq("Result message not implemented: #{turn.inspect}")
+      end
+    end
+
+
   end
 end
