@@ -7,14 +7,19 @@ RSpec.fdescribe TurnMessage do
 
   describe ".for" do
     context "all elements guessed at the exact position" do
-      it "congratulates the player" do
+      it "returns congratulatory message to the player" do
         turn = Turn.new(passcode: passcode)
         turn_message = turn.guess(["RED", "GREEN", "BLUE", "YELLOW"])
         expect(described_class.for(turn_message)).to eq("Congratulations!")
       end
     end
+
+    context "one color guessed at the exact position" do
+      it "returns a message (one correct guess) to the player" do
+        turn = Turn.new(passcode: passcode)
+        turn_message = turn.guess(["RED", "ORANGE", "ORANGE", "ORANGE"])
+        expect(described_class.for(turn_message)).to eq("One correct guess at the exact position")
+      end
+    end
   end
 end
-
-# turn = Turn.new(passcode: passcode)
-#         feedback = turn.guess(["RED", "ORANGE", "ORANGE", "ORANGE"])
