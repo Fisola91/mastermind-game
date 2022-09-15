@@ -15,7 +15,7 @@ RSpec.fdescribe TurnMessage do
     end
 
     describe "unimplemented guess" do
-      it "returns a message(guess not implemented) to the player" do
+      it "returns a message for result(guess colors) that aren't implemented." do
         turn = Turn.new(passcode: passcode)
         expect(described_class.for(turn)).to eq("Result message not implemented: #{turn.inspect}")
       end
@@ -31,7 +31,7 @@ RSpec.fdescribe TurnMessage do
       end
 
       context "one color guessed at the exact position" do
-        it "returns a message(one correct guess) to the player" do
+        it "returns a message for one correct guess color" do
           turn = Turn.new(passcode: passcode)
           turn_message = turn.guess(["RED", "ORANGE", "ORANGE", "ORANGE"])
           expect(described_class.for(turn_message)).to eq("One correct guess at the exact position")
@@ -39,7 +39,7 @@ RSpec.fdescribe TurnMessage do
       end
 
       context "two colors guessed at the exact position" do
-        it "returns a message(two correct guess) to the player" do
+        it "returns a message for two correct guess colors" do
           turn = Turn.new(passcode: passcode)
           turn_message = turn.guess(["RED", "GREEN", "ORANGE", "ORANGE"])
           expect(described_class.for(turn_message)).to eq("Two correct guess at the exact position")
@@ -47,7 +47,7 @@ RSpec.fdescribe TurnMessage do
       end
 
       context "three colors guessed at the exact position" do
-        it "returns a message(three correct guess) to the player" do
+        it "returns a message for three correct guess colors" do
           turn = Turn.new(passcode: passcode)
           turn_message = turn.guess(["RED", "GREEN", "BLUE", "ORANGE"])
           expect(described_class.for(turn_message)).to eq("Three correct guess at the exact position")
@@ -57,7 +57,7 @@ RSpec.fdescribe TurnMessage do
 
     describe "partial position" do
       context "all colors guessed at the wrong position" do
-        it "returns a message(four partial guesses) to the player" do
+        it "returns a message for four partial guess colors" do
           turn = Turn.new(passcode: passcode)
           turn_message = turn.guess(["YELLOW", "BLUE", "GREEN", "RED"])
           expect(described_class.for(turn_message)).to eq("Four colors guessed at the wrong position")
@@ -65,7 +65,7 @@ RSpec.fdescribe TurnMessage do
       end
 
       context "three colors guessed at the wrong position" do
-        it "returns a message(three partial guesses) to the player" do
+        it"returns a message for three partial guess colors" do
           turn = Turn.new(passcode: passcode)
           turn_message = turn.guess(["ORANGE", "BLUE", "GREEN", "RED"])
           expect(described_class.for(turn_message)).to eq("Three colors guessed at the wrong position")
@@ -73,7 +73,7 @@ RSpec.fdescribe TurnMessage do
       end
 
       context "two colors guessed at the wrong position" do
-        it "returns a message(two partial guesses) to the player" do
+        it "returns a message for two partial guess colors" do
           turn = Turn.new(passcode: passcode)
           turn_message = turn.guess(["BLUE", "RED", "ORANGE", "ORANGE"])
           expect(described_class.for(turn_message)).to eq("Two colors guessed at the wrong position")
@@ -81,16 +81,38 @@ RSpec.fdescribe TurnMessage do
       end
 
       context "one color guessed at the wrong position" do
-        it "returns a message(one partial guesses) to the player" do
+        it "returns a message for one partial guess colors" do
           turn = Turn.new(passcode: passcode)
           turn_message = turn.guess(["BLUE", "ORANGE", "ORANGE", "ORANGE"])
           expect(described_class.for(turn_message)).to eq("One color guessed at the wrong position")
         end
       end
-
     end
 
+    describe "exact and partial position" do
+      context "two exact, two partial match" do
+        it "returns a message for two :exact, two :partial guess colors" do
+          turn = Turn.new(passcode: passcode)
+          turn_message = turn.guess(["RED", "BLUE", "GREEN", "YELLOW"])
+          expect(described_class.for(turn_message)).to eq("Four colors guessed, two at the exact position and two at the wrong position")
+        end
+      end
 
+      context "one exact, one partial match" do
+        it "returns a message for one :exact, one :partial guess colors" do
+          turn = Turn.new(passcode: passcode)
+          turn_message = turn.guess(["RED", "BLUE", "ORANGE", "ORANGE"])
+          expect(described_class.for(turn_message)).to eq("Two colors guessed, one at the exact position and one at the wrong position")
+        end
+      end
 
+      context "two exact, one partial match" do
+        it "returns a message for two :exact, one :partial guess colors" do
+          turn = Turn.new(passcode: passcode)
+          turn_message = turn.guess(["RED", "GREEN", "YELLOW", "ORANGE"])
+          expect(described_class.for(turn_message)).to eq("Three colors guessed, two at the exact position and one at the wrong position")
+        end
+      end
+    end
   end
 end
