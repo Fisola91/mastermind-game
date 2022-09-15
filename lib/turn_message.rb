@@ -9,10 +9,10 @@ class TurnMessage
       "Two correct guess at the exact position"
     elsif result == [:exact, :exact, :exact]
       "Three correct guess at the exact position"
-    elsif result = [:partial, :partial, :partial, :partial]
-      "Four colors guessed at the wrong position"
     elsif result == []
       "Incorrect guess"
+    elsif result == [:partial, :partial, :partial, :partial]
+      "Four colors guessed at the wrong position"
     else
       "Result message not implemented: #{result.inspect}"
     end

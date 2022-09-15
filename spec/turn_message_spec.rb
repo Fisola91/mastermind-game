@@ -55,14 +55,14 @@ RSpec.fdescribe TurnMessage do
       end
     end
 
-    # describe "partial position" do
-    #   context "all colors guessed at the wrong position" do
-    #     it "returns a message (four partial guesses) to the player" do
-    #       turn = Turn.new(passcode: passcode)
-    #       turn_message = turn.guess(["YELLOW", "BLUE", "GREEN", "RED"])
-    #       expect(described_class.for(turn_message)).to eq("Four colors guessed at the wrong position")
-    #     end
-    #   end
+    describe "partial position" do
+      context "all colors guessed at the wrong position" do
+        it "returns a message (four partial guesses) to the player" do
+          turn = Turn.new(passcode: passcode)
+          turn_message = turn.guess(["YELLOW", "BLUE", "GREEN", "RED"])
+          expect(described_class.for(turn_message)).to eq("Four colors guessed at the wrong position")
+        end
+      end
 
     end
 
