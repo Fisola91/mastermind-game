@@ -21,5 +21,13 @@ RSpec.fdescribe TurnMessage do
         expect(described_class.for(turn_message)).to eq("One correct guess at the exact position")
       end
     end
+
+    context "two colors guessed at the exact position" do
+      it "returns a message (two correct guess) to the player" do
+        turn = Turn.new(passcode: passcode)
+        turn_message = turn.guess(["RED", "GREEN", "ORANGE", "ORANGE"])
+        expect(described_class.for(turn_message)).to eq("Two correct guess at the exact position")
+      end
+    end
   end
 end
