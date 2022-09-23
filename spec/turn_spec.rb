@@ -36,7 +36,7 @@ RSpec.describe Turn do
       end
     end
 
-    context "four elements guessed at the exact position" do
+    context "four colors guessed at the exact position" do
       it "returns four :exact values" do
         turn = Turn.new(passcode: passcode)
         feedback = turn.guess(["RED", "GREEN", "BLUE", "YELLOW"])

@@ -1,5 +1,6 @@
 require "mastermind"
 
+
 RSpec.describe Mastermind do
   describe "#mastermind" do
     let(:output) { StringIO.new }
