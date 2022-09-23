@@ -106,29 +106,21 @@ RSpec.describe TurnMessage do
         end
       end
 
-      context "one partial, one exact match" do
-        it "returns a message for one :wrong, one :exact guess colors" do
+      context "two exact, one partial match" do
+        it "returns a message for two :exact, one :partial guess colors" do
           turn = Turn.new(passcode: passcode)
-          turn_message = turn.guess(["BLUE", "GREEN", "ORANGE", "ORANGE"])
-          expect(described_class.for(turn_message)).to eq("Two colors guessed, one at the wrong position and one at the exact position")
+          turn_message = turn.guess(["RED", "YELLOW", "BLUE", "ORANGE"])
+          expect(described_class.for(turn_message)).to eq("Three colors guessed, Two at the exact position and one at the wrong position")
         end
       end
 
-      # context "two exact, one partial match" do
-      #   it "returns a message for two :exact, one :partial guess colors" do
-      #     turn = Turn.new(passcode: passcode)
-      #     turn_message = turn.guess(["RED", "GREEN", "YELLOW", "ORANGE"])
-      #     expect(described_class.for(turn_message)).to eq("Three colors guessed, two at the exact position and one at the wrong position")
-      #   end
-      # end
-
-      # context "one exact, two partial match" do
-      #   it "returns a message for one :exact, two :partial guess colors" do
-      #     turn = Turn.new(passcode: passcode)
-      #     turn_message = turn.guess(["RED", "GREEN", "YELLOW", "ORANGE"])
-      #     expect(described_class.for(turn_message)).to eq("Three colors guessed, one at the exact position and two at the wrong position")
-      #   end
-      # end
+      context "one exact, two partial match" do
+        it "returns a message for one :exact, two :partial guess colors" do
+          turn = Turn.new(passcode: passcode)
+          turn_message = turn.guess(["RED", "GREEN", "YELLOW", "ORANGE"])
+          expect(described_class.for(turn_message)).to eq("Three colors guessed, one at the exact position and two at the wrong position")
+        end
+      end
     end
   end
 end
