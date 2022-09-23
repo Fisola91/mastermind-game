@@ -1,12 +1,5 @@
 class TurnMessage
   def self.for(result)
-    # if reasult.size == 1
-    #   word_anagram = "color"
-    # else
-    #   word_anagram = "colors"
-    # end
-    # guess_number = 0
-    # Use while loop to iterate here --- LATER
     if result == [:exact, :exact, :exact, :exact]
       "Congratulations!"
     elsif result == [:exact]
@@ -27,6 +20,8 @@ class TurnMessage
       "One color guessed at the wrong position"
     elsif result == [:exact, :partial]
       "Two colors guessed, one at the exact position and one at the wrong position"
+    # elsif result == [:partial, :exact]
+    #   "Two colors guessed, one at the wrong position and one at the exact position"
     elsif result == [:exact, :partial, :partial, :exact]
       "Four colors guessed, two at the exact position and two at the wrong position"
     else

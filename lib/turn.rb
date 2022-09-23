@@ -12,7 +12,7 @@ class Turn
         result << :partial
       end
     end
-    result
+    result.sort
   end
 
   private

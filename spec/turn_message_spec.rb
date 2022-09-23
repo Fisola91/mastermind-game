@@ -2,7 +2,7 @@ require "turn_message"
 require "mastermind"
 require "turn"
 
-RSpec.fdescribe TurnMessage do
+RSpec.describe TurnMessage do
   let(:passcode) { ["RED", "GREEN", "BLUE", "YELLOW"] }
 
   describe ".for" do
@@ -103,6 +103,14 @@ RSpec.fdescribe TurnMessage do
           turn = Turn.new(passcode: passcode)
           turn_message = turn.guess(["RED", "BLUE", "ORANGE", "ORANGE"])
           expect(described_class.for(turn_message)).to eq("Two colors guessed, one at the exact position and one at the wrong position")
+        end
+      end
+
+      context "one partial, one exact match" do
+        it "returns a message for one :wrong, one :exact guess colors" do
+          turn = Turn.new(passcode: passcode)
+          turn_message = turn.guess(["BLUE", "GREEN", "ORANGE", "ORANGE"])
+          expect(described_class.for(turn_message)).to eq("Two colors guessed, one at the wrong position and one at the exact position")
         end
       end
 
