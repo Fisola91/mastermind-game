@@ -10,5 +10,5 @@ gem "sinatra-contrib"
 gem "slim"
 
 group :test do
-  "rspec"
+  gem "rspec"
 end
