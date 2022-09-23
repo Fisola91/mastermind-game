@@ -114,13 +114,13 @@ RSpec.describe TurnMessage do
         end
       end
 
-      # context "two exact, two partial match" do
-      #   it "returns a message for two :exact, two :partial guess colors" do
-      #     turn = Turn.new(passcode: passcode)
-      #     turn_message = turn.guess(["RED", "BLUE", "GREEN", "YELLOW"])
-      #     expect(described_class.for(turn_message)).to eq("Four colors guessed, two at the exact position and two at the wrong position")
-      #   end
-      # end
+      context "three exact, one partial match" do
+        it "returns a message for three :exact, one :partial guess colors" do
+          turn = Turn.new(passcode: passcode)
+          turn_message = turn.guess(["RED", "BLUE", "YELLOW", "GREEN"])
+          expect(described_class.for(turn_message)).to eq("Four colors guessed, one at the exact position and three at the wrong position")
+        end
+      end
     end
   end
 end
