@@ -1,5 +1,6 @@
 require "ostruct"
 
+
 class WebSubmit
   def initialize(params)
     @params = params
@@ -32,7 +33,6 @@ class WebSubmit
         end
       end
     else
-      next_attempt = nil
       not_lost = false
       message = "You lost, ran out of turns."
     end
