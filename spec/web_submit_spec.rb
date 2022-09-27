@@ -95,6 +95,26 @@ RSpec.describe WebSubmit do
       end
     end
 
+    context "third guess, 2/4 match" do
+      let(:current_attempt) { 3 }
+      let(:guess1) { "RED" }
+      let(:guess2) { "GREEN" }
+      let(:guess3) { "YELLOW" }
+      let(:guess4) { "BLUE" }
+
+      it "returns four :partial values" do
+        subject = described_class.new(params)
+        view = subject.view
+
+        expect(view.chances).to eq 4
+        expect(view.not_lost).to eq true
+        expect(view.current_attempt).to eq 3
+        expect(view.next_attempt).to eq 4
+        expect(view.error_message).to eq nil
+        expect(view.message).to eq "Four colors guessed, two at the exact position and two at the wrong position"
+      end
+    end
+
     context "looses all guess chances" do
       let(:current_attempt) { 5 }
       let(:guess1) { nil }
