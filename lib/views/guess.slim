@@ -1,19 +1,19 @@
-- if @not_lost
+- if @view.not_lost
   h3 Guess!
   p
-    = "Attempt: #{@current_attempt}/#{@chances}"
+    = "Attempt: #{@view.current_attempt}/#{@view.chances}"
 
   form.pb2
     input name="guess1" autocomplete="off" autofocus="autofocus"
     input name="guess2" autocomplete="off"
     input name="guess3" autocomplete="off"
     input name="guess4" autocomplete="off"
-    input name="current_attempt" type="hidden" value=(@current_attempt + 1)
+    input name="current_attempt" type="hidden" value=(@view.next_attempt)
     input type="submit"
 
-- if @error_message
+- if @view.error_message
   pre.bg-red.h3.white.pa2
-    = @error_message
-- if @message
+    = @view.error_message
+- if @view.message
   pre.bg-blue.h3.white.pa2
-    = @message
+    = @view.message
