@@ -32,7 +32,6 @@ class WebSubmit
         end
       end
     else
-      next_attempt = nil
       not_lost = false
       message = "You lost, ran out of turns."
     end
