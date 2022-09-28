@@ -221,26 +221,46 @@ RSpec.describe WebSubmit do
       end
     end
 
-    # describe "wrong input" do
-    #   context "first attempt, wrong input" do
-    #     let(:current_attempt) { 1 }
-    #     let(:guess1) { "R" }
-    #     let(:guess2) { "G" }
-    #     let(:guess3) { "B" }
-    #     let(:guess4) { "Y" }
+    describe "wrong input" do
+      context "first attempt, wrong input" do
+        let(:current_attempt) { 1 }
+        let(:guess1) { "R" }
+        let(:guess2) { "G" }
+        let(:guess3) { "B" }
+        let(:guess4) { "Y" }
 
-    #     it "returns invalid input" do
-    #       subject = described_class.new(params)
-    #       view = subject.view
+        it "returns invalid input" do
+          subject = described_class.new(params)
+          view = subject.view
 
-    #       expect(view.chances).to eq 4
-    #       expect(view.not_lost).to eq true
-    #       expect(view.current_attempt).to eq 1
-    #       expect(view.next_attempt).to eq 1
-    #       expect(view.error_message).to eq "Invalid input, try again!"
-    #       expect(view.message).to eq nil
-    #     end
-    #   end
+          expect(view.chances).to eq 4
+          expect(view.not_lost).to eq true
+          expect(view.current_attempt).to eq 1
+          expect(view.next_attempt).to eq 1
+          expect(view.error_message).to eq "Invalid input, try again!"
+          expect(view.message).to eq nil
+        end
+      end
+
+      context "first attempt, incomplete guess value" do
+        let(:current_attempt) { 2 }
+        let(:guess1) { "RED" }
+        let(:guess2) { "GREEN" }
+        let(:guess3) { "BLUE" }
+        let(:guess4) { "" }
+
+        it "returns invalid input" do
+          subject = described_class.new(params)
+          view = subject.view
+
+          expect(view.chances).to eq 4
+          expect(view.not_lost).to eq true
+          expect(view.current_attempt).to eq 2
+          expect(view.next_attempt).to eq 2
+          expect(view.error_message).to eq "Invalid input, try again!"
+          expect(view.message).to eq nil
+        end
+      end
     end
 
 
