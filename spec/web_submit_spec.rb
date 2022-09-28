@@ -15,7 +15,7 @@ RSpec.describe WebSubmit do
     }
   end
   describe "#view" do
-    context "last guess, 4/4 match" do
+    context "first attempt, 4/4 match" do
       let(:current_attempt) { 1 }
       let(:guess1) { "RED" }
       let(:guess2) { "GREEN" }
@@ -35,7 +35,7 @@ RSpec.describe WebSubmit do
       end
     end
 
-    context "first guess, 3/4 match" do
+    context "first attempt, 3/4 match" do
       let(:current_attempt) { 1 }
       let(:guess1) { "RED" }
       let(:guess2) { "GREEN" }
@@ -75,7 +75,7 @@ RSpec.describe WebSubmit do
       end
     end
 
-    context "second guess, wrong position" do
+    context "second attempt, wrong position" do
       let(:current_attempt) { 2 }
       let(:guess1) { "BLUE" }
       let(:guess2) { "RED" }
@@ -95,7 +95,7 @@ RSpec.describe WebSubmit do
       end
     end
 
-    context "third guess, 2/4 match" do
+    context "third attempt, 2/4 match" do
       let(:current_attempt) { 3 }
       let(:guess1) { "RED" }
       let(:guess2) { "GREEN" }
@@ -111,7 +111,7 @@ RSpec.describe WebSubmit do
         expect(view.current_attempt).to eq 3
         expect(view.next_attempt).to eq 4
         expect(view.error_message).to eq nil
-        expect(view.message).to eq "Four colors guessed, two at the exact position and two at the wrong position"
+        expect(view.message).to eq "Four colors guessed at the wrong position"
       end
     end
 
