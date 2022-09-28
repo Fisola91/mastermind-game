@@ -75,25 +75,69 @@ RSpec.describe WebSubmit do
       end
     end
 
-    context "first attempt, 2/4 match" do
-      let(:current_attempt) { 1 }
-      let(:guess1) { "RED" }
-      let(:guess2) { "GREEN" }
-      let(:guess3) { nil }
-      let(:guess4) { nil }
+    describe "nil and guess value cases" do
+      context "first attempt, 3/4 match" do
+        let(:current_attempt) { 1 }
+        let(:guess1) { "RED" }
+        let(:guess2) { "GREEN" }
+        let(:guess3) { "BLUE" }
+        let(:guess4) { nil }
 
-      it "returns invalid input" do
-        subject = described_class.new(params)
-        view = subject.view
+        it "returns invalid input" do
+          subject = described_class.new(params)
+          view = subject.view
 
-        expect(view.chances).to eq 4
-        expect(view.not_lost).to eq true
-        expect(view.current_attempt).to eq 1
-        expect(view.next_attempt).to eq 1
-        expect(view.error_message).to eq "Invalid input, try again!"
-        expect(view.message).to eq  nil
+          expect(view.chances).to eq 4
+          expect(view.not_lost).to eq true
+          expect(view.current_attempt).to eq 1
+          expect(view.next_attempt).to eq 1
+          expect(view.error_message).to eq "Invalid input, try again!"
+          expect(view.message).to eq  nil
+        end
+      end
+
+      context "first attempt, 2/4 match" do
+        let(:current_attempt) { 1 }
+        let(:guess1) { "RED" }
+        let(:guess2) { "GREEN" }
+        let(:guess3) { nil }
+        let(:guess4) { nil }
+
+        it "returns invalid input" do
+          subject = described_class.new(params)
+          view = subject.view
+
+          expect(view.chances).to eq 4
+          expect(view.not_lost).to eq true
+          expect(view.current_attempt).to eq 1
+          expect(view.next_attempt).to eq 1
+          expect(view.error_message).to eq "Invalid input, try again!"
+          expect(view.message).to eq  nil
+        end
+      end
+
+      context "first attempt, 1/4 match" do
+        let(:current_attempt) { 1 }
+        let(:guess1) { "RED" }
+        let(:guess2) { nil }
+        let(:guess3) { nil }
+        let(:guess4) { nil }
+
+        it "returns invalid input" do
+          subject = described_class.new(params)
+          view = subject.view
+
+          expect(view.chances).to eq 4
+          expect(view.not_lost).to eq true
+          expect(view.current_attempt).to eq 1
+          expect(view.next_attempt).to eq 1
+          expect(view.error_message).to eq "Invalid input, try again!"
+          expect(view.message).to eq  nil
+        end
       end
     end
+
+
 
     context "second attempt, wrong position" do
       let(:current_attempt) { 2 }
