@@ -321,6 +321,28 @@ RSpec.describe WebSubmit do
       end
     end
 
+    describe "cases: incorrect guess" do
+      context "first attempt, incorrect guess" do
+        let(:current_attempt) { 1 }
+        let(:guess1) { "ORANGE" }
+        let(:guess2) { "PURPLE" }
+        let(:guess3) { "PURPLE" }
+        let(:guess4) { "ORANGE" }
+
+        it "returns an incorrect message" do
+          subject = described_class.new(params)
+          view = subject.view
+
+          expect(view.chances).to eq 4
+          expect(view.not_lost).to eq true
+          expect(view.current_attempt).to eq 1
+          expect(view.next_attempt).to eq 2
+          expect(view.error_message).to eq nil
+          expect(view.message).to eq  "Incorrect guess"
+        end
+      end
+    end
+
     describe "cases: exact position and nil" do
       context "first attempt, 3/4 match" do
         let(:current_attempt) { 1 }
