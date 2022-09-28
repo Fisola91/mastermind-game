@@ -35,27 +35,89 @@ RSpec.describe WebSubmit do
       end
     end
 
-    context "first attempt, 3/4 match" do
-      let(:current_attempt) { 1 }
-      let(:guess1) { "RED" }
-      let(:guess2) { "GREEN" }
-      let(:guess3) { "BLUE" }
-      let(:guess4) { "BLUE" }
+    describe "cases: exact position" do
+      context "first attempt, 1/4 match" do
+        let(:current_attempt) { 1 }
+        let(:guess1) { "RED" }
+        let(:guess2) { "PURPLE" }
+        let(:guess3) { "ORANGE" }
+        let(:guess4) { "ORANGE" }
 
-      it "returns correct view values" do
-        subject = described_class.new(params)
-        view = subject.view
+        it "returns a message for one accurate color guess" do
+          subject = described_class.new(params)
+          view = subject.view
 
-        expect(view.chances).to eq 4
-        expect(view.not_lost).to eq true
-        expect(view.current_attempt).to eq 1
-        expect(view.next_attempt).to eq 2
-        expect(view.error_message).to eq nil
-        expect(view.message).to eq "Four colors guessed, three at the exact position and one at the wrong position"
+          expect(view.chances).to eq 4
+          expect(view.not_lost).to eq true
+          expect(view.current_attempt).to eq 1
+          expect(view.next_attempt).to eq 2
+          expect(view.error_message).to eq nil
+          expect(view.message).to eq "One correct guess at the exact position"
+        end
+      end
+
+      context "second attempt, 2/4 match" do
+        let(:current_attempt) { 2 }
+        let(:guess1) { "RED" }
+        let(:guess2) { "GREEN" }
+        let(:guess3) { "PURPLE" }
+        let(:guess4) { "ORANGE" }
+
+        it "returns a message for two accurate color guesses" do
+          subject = described_class.new(params)
+          view = subject.view
+
+          expect(view.chances).to eq 4
+          expect(view.not_lost).to eq true
+          expect(view.current_attempt).to eq 2
+          expect(view.next_attempt).to eq 3
+          expect(view.error_message).to eq nil
+          expect(view.message).to eq "Two correct guess at the exact position"
+        end
+      end
+
+      context "third attempt, 3/4 match" do
+        let(:current_attempt) { 3 }
+        let(:guess1) { "RED" }
+        let(:guess2) { "GREEN" }
+        let(:guess3) { "BLUE" }
+        let(:guess4) { "ORANGE" }
+
+        it "returns a message for three accurate color guesses" do
+          subject = described_class.new(params)
+          view = subject.view
+
+          expect(view.chances).to eq 4
+          expect(view.not_lost).to eq true
+          expect(view.current_attempt).to eq 3
+          expect(view.next_attempt).to eq 4
+          expect(view.error_message).to eq nil
+          expect(view.message).to eq "Three correct guess at the exact position"
+        end
+      end
+
+      context "fourth attempt, 4/4 match" do
+        let(:current_attempt) { 4 }
+        let(:guess1) { "RED" }
+        let(:guess2) { "GREEN" }
+        let(:guess3) { "BLUE" }
+        let(:guess4) { "YELLOW" }
+
+        it "congratulates the player" do
+          subject = described_class.new(params)
+          view = subject.view
+
+          expect(view.chances).to eq 4
+          expect(view.not_lost).to eq true
+          expect(view.current_attempt).to eq 4
+          expect(view.next_attempt).to eq 5
+          expect(view.error_message).to eq nil
+          expect(view.message).to eq "Congratulations!"
+        end
       end
     end
 
-    describe "nil and guess value cases" do
+    describe "cases: exact position and nil" do
       context "first attempt, 3/4 match" do
         let(:current_attempt) { 1 }
         let(:guess1) { "RED" }
@@ -116,8 +178,6 @@ RSpec.describe WebSubmit do
         end
       end
     end
-
-
 
     context "third attempt, 2/4 match" do
       let(:current_attempt) { 3 }
@@ -262,15 +322,6 @@ RSpec.describe WebSubmit do
         end
       end
     end
-
-
-
-
-
-
-
-
-
 
     describe "looses all guess chances" do
       context "when nil" do
