@@ -58,7 +58,6 @@ RSpec.describe WebSubmit do
     end
   end
 
-
   describe "cases: exact position(s)" do
     context "first attempt, 1/4 match" do
       let(:current_attempt) { 1 }
