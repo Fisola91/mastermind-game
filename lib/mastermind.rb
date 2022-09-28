@@ -42,7 +42,6 @@ class Mastermind
         redo
       end
 
-
       result = Turn.new(passcode: passcode).guess(guess_colors)
 
       message = TurnMessage.for(result)
