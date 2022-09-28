@@ -90,18 +90,35 @@ RSpec.describe Mastermind do
       end
     end
 
-    context "game restart" do
-      it "restarts the game if a player makes an invalid move" do
-        guesses = ["A B C D", "RED GREEN BLUE YELLOW"]
-        input = StringIO.new(guesses.join("\n"))
-        game = Mastermind.new(passcode: ["RED", "GREEN", "BLUE", "YELLOW"], input: input, output: output, chances: 4)
+    describe "game restart" do
+      context "wrong input" do
+        it "restarts the game if a player makes an invalid move" do
+          guesses = ["A B C D", "RED GREEN BLUE YELLOW"]
+          input = StringIO.new(guesses.join("\n"))
+          game = Mastermind.new(passcode: ["RED", "GREEN", "BLUE", "YELLOW"], input: input, output: output, chances: 4)
 
-        game.start
+          game.start
 
-        game_output_lines = output.string.split("\n").map(&:strip)
-        expect(game_output_lines[2]).to eq("Invalid input, try again!")
-        expect(game_output_lines[3]).to eq("Congratulations!")
+          game_output_lines = output.string.split("\n").map(&:strip)
+          expect(game_output_lines[2]).to eq("Invalid input, try again!")
+          expect(game_output_lines[3]).to eq("Congratulations!")
+        end
+      end
+
+      context "incorrect length of input colors" do
+        it "restarts the game if a player makes an invalid move" do
+          guesses = ["RED GREEN BLUE", "RED GREEN BLUE YELLOW"]
+          input = StringIO.new(guesses.join("\n"))
+          game = Mastermind.new(passcode: ["RED", "GREEN", "BLUE", "YELLOW"], input: input, output: output, chances: 4)
+
+          game.start
+
+          game_output_lines = output.string.split("\n").map(&:strip)
+          expect(game_output_lines[2]).to eq("Ensure you enter four colors, try again!")
+          expect(game_output_lines[3]).to eq("Congratulations!")
+        end
       end
     end
+
   end
 end
