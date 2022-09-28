@@ -75,6 +75,26 @@ RSpec.describe WebSubmit do
       end
     end
 
+    context "first attempt, 2/4 match" do
+      let(:current_attempt) { 1 }
+      let(:guess1) { "RED" }
+      let(:guess2) { "GREEN" }
+      let(:guess3) { nil }
+      let(:guess4) { nil }
+
+      it "returns invalid input" do
+        subject = described_class.new(params)
+        view = subject.view
+
+        expect(view.chances).to eq 4
+        expect(view.not_lost).to eq true
+        expect(view.current_attempt).to eq 1
+        expect(view.next_attempt).to eq 1
+        expect(view.error_message).to eq "Invalid input, try again!"
+        expect(view.message).to eq  nil
+      end
+    end
+
     context "second attempt, wrong position" do
       let(:current_attempt) { 2 }
       let(:guess1) { "BLUE" }
@@ -114,6 +134,15 @@ RSpec.describe WebSubmit do
         expect(view.message).to eq  "Four colors guessed, two at the exact position and two at the wrong position"
       end
     end
+
+
+
+
+
+
+
+
+
 
     describe "looses all guess chances" do
       context "when nil" do
