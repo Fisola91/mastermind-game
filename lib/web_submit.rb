@@ -1,6 +1,5 @@
 require "ostruct"
 
-
 class WebSubmit
   def initialize(params)
     @params = params
