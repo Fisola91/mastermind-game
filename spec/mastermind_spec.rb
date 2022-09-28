@@ -20,10 +20,10 @@ RSpec.describe Mastermind do
         game.start
 
         game_output_lines = output.string.split("\n").map(&:strip)
-        expect(game_output_lines[2]).to eq "Incorrect guess"
-          expect(game_output_lines[3]).to eq "One correct guess at the exact position"
-          expect(game_output_lines[4]).to eq "Two correct guess at the exact position"
-          expect(game_output_lines[5]).to eq "Three correct guess at the exact position"
+        expect(game_output_lines[2]).to eq "Incorrect guess."
+          expect(game_output_lines[3]).to eq "One color guessed at the exact position."
+          expect(game_output_lines[4]).to eq "Two colors guessed at the exact position."
+          expect(game_output_lines[5]).to eq "Three colors guessed at the exact position."
           expect(game_output_lines[6]).to eq "You lost, ran out of turns."
         end
     end
@@ -51,7 +51,7 @@ RSpec.describe Mastermind do
         game.start
 
         game_output_lines = output.string.split("\n").map(&:strip)
-        expect(game_output_lines[2]).to eq "One correct guess at the exact position"
+        expect(game_output_lines[2]).to eq "One color guessed at the exact position."
         expect(game_output_lines[3]).to eq "Congratulations!"
       end
 
@@ -66,8 +66,8 @@ RSpec.describe Mastermind do
         game.start
 
         game_output_lines = output.string.split("\n").map(&:strip)
-        expect(game_output_lines[2]).to eq "One correct guess at the exact position"
-        expect(game_output_lines[3]).to eq "Two correct guess at the exact position"
+        expect(game_output_lines[2]).to eq "One color guessed at the exact position."
+        expect(game_output_lines[3]).to eq "Two colors guessed at the exact position."
         expect(game_output_lines[4]).to eq "Congratulations!"
       end
 
@@ -83,9 +83,9 @@ RSpec.describe Mastermind do
         game.start
 
         game_output_lines = output.string.split("\n").map(&:strip)
-        expect(game_output_lines[2]).to eq "One correct guess at the exact position"
-        expect(game_output_lines[3]).to eq "Two correct guess at the exact position"
-        expect(game_output_lines[4]).to eq "Three correct guess at the exact position"
+        expect(game_output_lines[2]).to eq "One color guessed at the exact position."
+        expect(game_output_lines[3]).to eq "Two colors guessed at the exact position."
+        expect(game_output_lines[4]).to eq "Three colors guessed at the exact position."
         expect(game_output_lines[5]).to eq "Congratulations!"
       end
     end
