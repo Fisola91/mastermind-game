@@ -117,6 +117,88 @@ RSpec.describe WebSubmit do
       end
     end
 
+    describe "cases: partial position(s)" do
+      context "first attempt, 1/4 wrong position" do
+        let(:current_attempt) { 1 }
+        let(:guess1) { "GREEN" }
+        let(:guess2) { "ORANGE" }
+        let(:guess3) { "PURPLE" }
+        let(:guess4) { "PURPLE" }
+
+        it "returns a message for one wrong color guess" do
+          subject = described_class.new(params)
+          view = subject.view
+
+          expect(view.chances).to eq 4
+          expect(view.not_lost).to eq true
+          expect(view.current_attempt).to eq 1
+          expect(view.next_attempt).to eq 2
+          expect(view.error_message).to eq nil
+          expect(view.message).to eq "One color guessed at the wrong position"
+        end
+      end
+
+      context "second attempt, 2/4 wrong position" do
+        let(:current_attempt) { 2 }
+        let(:guess1) { "GREEN" }
+        let(:guess2) { "YELLOW" }
+        let(:guess3) { "PURPLE" }
+        let(:guess4) { "PURPLE" }
+
+        it "returns a message for two wrong color guesses" do
+          subject = described_class.new(params)
+          view = subject.view
+
+          expect(view.chances).to eq 4
+          expect(view.not_lost).to eq true
+          expect(view.current_attempt).to eq 2
+          expect(view.next_attempt).to eq 3
+          expect(view.error_message).to eq nil
+          expect(view.message).to eq "Two colors guessed at the wrong position"
+        end
+      end
+
+      context "third attempt, 3/4 wrong position" do
+        let(:current_attempt) { 3 }
+        let(:guess1) { "GREEN" }
+        let(:guess2) { "YELLOW" }
+        let(:guess3) { "RED" }
+        let(:guess4) { "PURPLE" }
+
+        it "returns a message for three wrong color guesses" do
+          subject = described_class.new(params)
+          view = subject.view
+
+          expect(view.chances).to eq 4
+          expect(view.not_lost).to eq true
+          expect(view.current_attempt).to eq 3
+          expect(view.next_attempt).to eq 4
+          expect(view.error_message).to eq nil
+          expect(view.message).to eq "Three colors guessed at the wrong position"
+        end
+      end
+
+      context "fourth attempt, 4/4 wrong position" do
+        let(:current_attempt) { 4 }
+        let(:guess1) { "GREEN" }
+        let(:guess2) { "YELLOW" }
+        let(:guess3) { "RED" }
+        let(:guess4) { "BLUE" }
+
+        it "returns a message for three wrong color guesses" do
+          subject = described_class.new(params)
+          view = subject.view
+
+          expect(view.chances).to eq 4
+          expect(view.not_lost).to eq true
+          expect(view.current_attempt).to eq 4
+          expect(view.next_attempt).to eq 5
+          expect(view.error_message).to eq nil
+          expect(view.message).to eq "Four colors guessed at the wrong position"
+        end
+      end
+    end
+
     describe "cases: exact position and nil" do
       context "first attempt, 3/4 match" do
         let(:current_attempt) { 1 }
