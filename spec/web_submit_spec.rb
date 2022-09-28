@@ -111,24 +111,43 @@ RSpec.describe WebSubmit do
         expect(view.current_attempt).to eq 3
         expect(view.next_attempt).to eq 4
         expect(view.error_message).to eq nil
-        expect(view.message).to eq "Four colors guessed at the wrong position"
+        expect(view.message).to eq  "Four colors guessed, two at the exact position and two at the wrong position"
       end
     end
 
-    context "looses all guess chances" do
-      let(:current_attempt) { 5 }
-      let(:guess1) { nil }
-      let(:guess2) { nil }
-      let(:guess3) { nil }
-      let(:guess4) { nil }
+    describe "looses all guess chances" do
+      context "when nil" do
+        let(:current_attempt) { 5 }
+        let(:guess1) { nil }
+        let(:guess2) { nil }
+        let(:guess3) { nil }
+        let(:guess4) { nil }
 
-      it "looses all the chances" do
-        subject = described_class.new(params)
-        view = subject.view
+        it "looses all the chances" do
+          subject = described_class.new(params)
+          view = subject.view
 
-        expect(view.not_lost).to eq false
-        expect(view.message).to eq "You lost, ran out of turns."
+          expect(view.not_lost).to eq false
+          expect(view.message).to eq "You lost, ran out of turns."
+        end
+      end
+
+      context "when empty string" do
+        let(:current_attempt) { 5 }
+        let(:guess1) { "" }
+        let(:guess2) { "" }
+        let(:guess3) { "" }
+        let(:guess4) { "" }
+
+        it "looses all the chances" do
+          subject = described_class.new(params)
+          view = subject.view
+
+          expect(view.not_lost).to eq false
+          expect(view.message).to eq "You lost, ran out of turns."
+        end
       end
     end
+
   end
 end
