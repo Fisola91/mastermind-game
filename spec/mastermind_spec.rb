@@ -106,7 +106,7 @@ RSpec.describe Mastermind do
       end
 
       context "incorrect length of input colors" do
-        it "restarts the game if a player makes an invalid move" do
+        it "restarts the game if a player entered incorrect length of guess colors" do
           guesses = ["RED GREEN BLUE", "RED GREEN BLUE YELLOW"]
           input = StringIO.new(guesses.join("\n"))
           game = Mastermind.new(passcode: ["RED", "GREEN", "BLUE", "YELLOW"], input: input, output: output, chances: 4)
