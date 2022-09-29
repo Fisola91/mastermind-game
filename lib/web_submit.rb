@@ -20,9 +20,6 @@ class WebSubmit
         rescue UnknownColorError
           next_attempt -= 1
           error_message = "Invalid input, try again!"
-        rescue NumberOfColorsError
-          next_attempt -= 1
-          error_message = "Ensure you enter four colors, try again!"
         end
 
         if error_message.nil?
