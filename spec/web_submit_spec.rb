@@ -37,27 +37,6 @@ RSpec.describe WebSubmit do
     end
   end
 
-  describe "unimplemented guess" do
-    let(:params) do
-      {
-        current_attempt: current_attempt,
-        code1: "RED",
-        code2: "GREEN",
-        code3: "BLUE",
-        code4: "YELLOW",
-      }
-    end
-    context "first attempt, umimplemented guess" do
-      let(:current_attempt) { 1 }
-      it "returns a message for unimplemented guess." do
-          subject = described_class.new(params)
-          view = subject.view
-          message = TurnMessage.for(view)
-        expect(message).to eq "Result message not implemented: #{view.inspect}"
-      end
-    end
-  end
-
   describe "cases: exact position(s)" do
     context "first attempt, 1/4 match" do
       let(:current_attempt) { 1 }
