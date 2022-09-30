@@ -25,6 +25,7 @@ class WebGame < Sinatra::Base
   get "/game/:code1/:code2/:code3/:code4" do
     action = WebSubmit.new(params)
     @view = action.view
+    @params = params
     slim :guess
   end
 end

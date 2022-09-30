@@ -9,15 +9,20 @@ RSpec.describe WebSubmit do
       code2: "GREEN",
       code3: "BLUE",
       code4: "YELLOW",
-      guess1: guess1,
-      guess2: guess2,
-      guess3: guess3,
-      guess4: guess4,
+      "attempts" => {
+        (current_attempt - 1).to_s => {
+          "guess1" => guess1,
+          "guess2" => guess2,
+          "guess3" => guess3,
+          "guess4" => guess4,
+        }
+      }
     }
   end
+
   describe "#view" do
     context "first attempt, 4/4 match" do
-      let(:current_attempt) { 1 }
+      let(:current_attempt) { 2 }
       let(:guess1) { "RED" }
       let(:guess2) { "GREEN" }
       let(:guess3) { "BLUE" }
@@ -29,8 +34,8 @@ RSpec.describe WebSubmit do
 
         expect(view.chances).to eq 4
         expect(view.not_lost).to eq true
-        expect(view.current_attempt).to eq 1
-        expect(view.next_attempt).to eq 2
+        expect(view.current_attempt).to eq 2
+        expect(view.next_attempt).to eq 3
         expect(view.error_message).to eq nil
         expect(view.message).to eq "Congratulations!"
       end
@@ -409,7 +414,7 @@ RSpec.describe WebSubmit do
 
   describe "wrong input" do
     context "first attempt, wrong input" do
-      let(:current_attempt) { 1 }
+      let(:current_attempt) { 2 }
       let(:guess1) { "R" }
       let(:guess2) { "G" }
       let(:guess3) { "B" }
@@ -421,8 +426,8 @@ RSpec.describe WebSubmit do
 
         expect(view.chances).to eq 4
         expect(view.not_lost).to eq true
-        expect(view.current_attempt).to eq 1
-        expect(view.next_attempt).to eq 1
+        expect(view.current_attempt).to eq 2
+        expect(view.next_attempt).to eq 2
         expect(view.error_message).to eq "Invalid input, try again!"
         expect(view.message).to eq nil
       end
@@ -445,6 +450,24 @@ RSpec.describe WebSubmit do
         expect(view.next_attempt).to eq 2
         expect(view.error_message).to eq "Invalid input, try again!"
         expect(view.message).to eq nil
+      end
+    end
+  end
+
+  describe "losing conditions" do
+    context "when out of chances" do
+      let(:current_attempt) { 5 }
+      let(:guess1) { nil }
+      let(:guess2) { nil }
+      let(:guess3) { nil }
+      let(:guess4) { nil }
+
+      it "returns a losing message" do
+        subject = described_class.new(params)
+        view = subject.view
+
+        expect(view.not_lost).to eq false
+        expect(view.message).to eq "You lost, ran out of turns."
       end
     end
   end
