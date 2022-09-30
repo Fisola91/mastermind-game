@@ -1,4 +1,5 @@
 require "ostruct"
+require "web_ui"
 
 class WebSubmit
   def initialize(params)
@@ -40,6 +41,7 @@ class WebSubmit
       next_attempt: next_attempt,
       error_message: error_message,
       message: message,
+      colors: WebUI.new.colors,
     )
   end
 

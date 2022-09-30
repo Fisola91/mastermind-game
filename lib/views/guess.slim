@@ -4,12 +4,29 @@
     = "Attempt: #{@view.current_attempt}/#{@view.chances}"
 
   form.pb2
-    input name="guess1" autocomplete="off" autofocus="autofocus"
-    input name="guess2" autocomplete="off"
-    input name="guess3" autocomplete="off"
-    input name="guess4" autocomplete="off"
+    select name="guess1" autofocus="autofocus"
+      option selected="selected"
+      - @view.colors.each do |color|
+        option value=color.upcase
+          = color
+    select name="guess2" autofocus="autofocus"
+      option selected="selected"
+      - @view.colors.each do |color|
+        option value=color.upcase
+          = color
+    select name="guess3" autofocus="autofocus"
+      option selected="selected"
+      - @view.colors.each do |color|
+        option value=color.upcase
+          = color
+    select name="guess4" autofocus="autofocus"
+      option selected="selected"
+      - @view.colors.each do |color|
+        option value=color.upcase
+          = color
+
     input name="current_attempt" type="hidden" value=(@view.next_attempt)
-    input type="submit"
+    input type="submit" value="Check"
 
 - if @view.error_message
   pre.bg-red.h3.white.pa2
