@@ -1,4 +1,4 @@
-- if @view.not_lost
+- if @view.not_lost && !@view.won
   h3 Guess!
   p
     = "Attempt: #{@view.current_attempt}/#{@view.chances}"

@@ -14,7 +14,7 @@ class WebSubmit
     next_attempt = current_attempt + 1
     won = false
 
-    if previous_attempt < chances
+    if previous_attempt <= chances
       passcode = [params[:code1], params[:code2], params[:code3], params[:code4]]
       guess_colors = [
         params.dig("attempts", previous_attempt.to_s, "guess1"),
