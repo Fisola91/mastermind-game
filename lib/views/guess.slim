@@ -1,7 +1,7 @@
 - if @view.not_lost && !@view.won
   h3 Guess!
   p
-    = "Attempt: #{@view.current_attempt}/#{@view.chances}"
+    = "Attempt: #{@view.current_attempt.to_i + 1}/#{@view.chances}"
 
 
 form.pb2
