@@ -28,13 +28,13 @@ class WebSubmit
         result = turn.guess(guess_colors)
         if result == GUESSED_CORRECTLY
           won = true
-          message = TurnMessage.for(result)
+          message = turn_message(result)
         else
           if ran_out_of_attempts?
             not_lost = false
             message = "You lost, ran out of turns."
           else
-            message = TurnMessage.for(result)
+            message = turn_message(result)
           end
         end
       end
@@ -56,6 +56,9 @@ class WebSubmit
   private
 
   attr_reader :params
+  def turn_message(result)
+    TurnMessage.for(result)
+  end
 
   def any_attempts_left?
     current_attempt <= CHANCES
