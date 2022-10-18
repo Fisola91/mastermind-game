@@ -26,15 +26,15 @@ class WebSubmit
       if error_message.nil?
         turn = Turn.new(passcode: passcode)
         result = turn.guess(guess_colors)
-        if result == GUESSED_CORRECTLY
+        if guessed_correctly?(result)
           won = true
-          message = turn_message(result)
+          message = TurnMessage.for(result)
         else
           if ran_out_of_attempts?
             not_lost = false
             message = "You lost, ran out of turns."
           else
-            message = turn_message(result)
+            message = TurnMessage.for(result)
           end
         end
       end
@@ -56,9 +56,10 @@ class WebSubmit
   private
 
   attr_reader :params
-  def turn_message(result)
-    TurnMessage.for(result)
-  end
+  # def turn_message(result)
+  #   TurnMessage.for(result)
+  # end
+
 
   def any_attempts_left?
     current_attempt <= CHANCES
@@ -78,6 +79,10 @@ class WebSubmit
 
   def ran_out_of_attempts?
     current_attempt == CHANCES
+  end
+
+  def guessed_correctly?(result)
+    result == GUESSED_CORRECTLY
   end
 
   def passcode
