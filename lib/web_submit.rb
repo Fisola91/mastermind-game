@@ -28,13 +28,13 @@ class WebSubmit
         result = turn.guess(guess_colors)
         if guessed_correctly?(result)
           won = true
-          message = TurnMessage.for(result)
+          message = turn_message(result)
         else
-          if ran_out_of_attempts?
+          if ran_out_of_attempts? # current_attempt == CHANCES
             not_lost = false
             message = "You lost, ran out of turns."
           else
-            message = TurnMessage.for(result)
+            message = turn_message(result)
           end
         end
       end
@@ -83,6 +83,10 @@ class WebSubmit
 
   def guessed_correctly?(result)
     result == GUESSED_CORRECTLY
+  end
+
+  def turn_message(result)
+    TurnMessage.for(result)
   end
 
   def passcode
