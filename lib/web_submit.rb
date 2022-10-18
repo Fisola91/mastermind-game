@@ -29,13 +29,12 @@ class WebSubmit
         if guessed_correctly?(result)
           won = true
           message = turn_message(result)
-        elsif ran_out_of_attempts? # current_attempt == CHANCES
+        elsif ran_out_of_attempts?
           not_lost = false
           message = "You lost, ran out of turns."
         else
           message = turn_message(result)
         end
-        # message = turn_message(result)
       end
     end
 
@@ -56,14 +55,6 @@ class WebSubmit
   private
 
   attr_reader :params
-  # def turn_message(result)
-  #   TurnMessage.for(result)
-  # end
-
-  # def lost_message
-  #   not_lost = false
-  #   message = "You lost, ran out of turns."
-  # end
 
   def any_attempts_left?
     current_attempt <= CHANCES
