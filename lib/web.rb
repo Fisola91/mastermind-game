@@ -19,7 +19,7 @@ class WebGame < Sinatra::Base
 
   get "/new-game" do
     passcode = ["RED", "GREEN", "BLUE", "YELLOW"]
-    redirect to("/game/#{passcode[0]}/#{passcode[1]}/#{passcode[2]}/#{passcode[3]}?current_attempt=1")
+    redirect to("/game/#{passcode[0]}/#{passcode[1]}/#{passcode[2]}/#{passcode[3]}?current_attempt=0")
   end
 
   get "/game/:code1/:code2/:code3/:code4" do

@@ -14,7 +14,7 @@ class WebSubmit
     next_attempt = current_attempt + 1
     won = false
 
-    if previous_attempt < chances
+    if current_attempt <= chances
       passcode = [params[:code1], params[:code2], params[:code3], params[:code4]]
       guess_colors = [
         params.dig("attempts", previous_attempt.to_s, "guess1"),
@@ -35,18 +35,23 @@ class WebSubmit
           result = turn.guess(guess_colors)
           if result == [:exact, :exact, :exact, :exact]
             won = true
+            message = "Congratulations!"
+          else
+            if current_attempt == 4
+              not_lost = false
+              message = "You lost, ran out of turns."
+            else
+              message = TurnMessage.for(result)
+            end
           end
-          message = TurnMessage.for(result)
         end
       end
-    else
-      not_lost = false
-      message = "You lost, ran out of turns."
     end
 
     OpenStruct.new(
       chances: chances,
       not_lost: not_lost,
+      previous_attempt: previous_attempt,
       current_attempt: current_attempt,
       next_attempt: next_attempt,
       error_message: error_message,
