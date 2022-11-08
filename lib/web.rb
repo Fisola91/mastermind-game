@@ -3,7 +3,7 @@ require "sinatra/reloader"
 require_relative "turn"
 require_relative "turn_message"
 require_relative "validate"
-
+require "pry"
 require_relative "web_ui"
 require_relative "web_submit"
 

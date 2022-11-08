@@ -1,6 +1,7 @@
 require "ostruct"
 require_relative "web_ui"
 
+
 class WebSubmit
   CHANCES = 4
   GUESSED_CORRECTLY = [:exact, :exact, :exact, :exact]

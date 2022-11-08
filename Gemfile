@@ -8,6 +8,7 @@ gem "puma"
 gem "sinatra"
 gem "sinatra-contrib"
 gem "slim"
+gem "pry"
 
 group :test do
   gem "rspec"
